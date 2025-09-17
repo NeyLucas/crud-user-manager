@@ -1,0 +1,155 @@
+/* ============================================= */
+/*         PALETA DE CORES CENTRALIZADA          */
+/* ============================================= */
+:root {
+    /* Cores Primárias */
+    --color-dark: #000000;
+    --color-dark-hover: #3a3939; /* Cor correspondente a rgb(71, 70, 70) */
+    --color-light: #ffffff;
+
+    /* Cores de Fundo e Bordas */
+    --color-border: #dddddd;
+    --color-border-hover: #a5a5a5;
+    --color-row-hover: #e7e7e7; /* Cor correspondente a rgb(231, 231, 231) */
+    
+    /* Cores de Ação (Botões) */
+    --color-action-edit: chocolate;
+    --color-action-delete: brown;
+    --color-action-save: forestgreen;
+
+    /* Para usar em sombras com transparência */
+    --color-dark-rgb: 0, 0, 0;
+}
+
+/* ============================================= */
+/*               ESTILOS GLOBAIS                 */
+/* ============================================= */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    color: var(--color-dark);
+}
+
+h1, .submit-button, .action-btn {
+    font-family: 'Montserrat', 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+#user-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    border: solid var(--color-dark) 1px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(var(--color-dark-rgb), 0.1);
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+label, input {font-size: 12pt;}
+label {width: 70px;}
+input {height: 25px; width: 100%;}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.form-input {width: 10vw;}
+
+/* ============================================= */
+/*                    BOTÕES                     */
+/* ============================================= */
+.submit-button {
+    font-weight: 600;
+    color: var(--color-light);
+    background-color: var(--color-dark);
+    margin: 15px 0 5px 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: var(--color-dark-hover);
+    box-shadow: 0px 1px 8px 2px rgba(var(--color-dark-rgb), 0.4);
+    transition: 0.2s ease-in-out;
+}
+
+.action-btn {
+    font-weight: 550;
+    height: 30px;
+    width: 65px;
+    color: var(--color-light);
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn { background-color: var(--color-action-edit); }
+.delete-btn { background-color: var(--color-action-delete); margin-left: 5px; }
+.save-btn { background-color: var(--color-action-save); }
+.back-btn { background-color: var(--color-action-delete); margin-left: 5px; }
+
+/* ============================================= */
+/*                    TABELA                     */
+/* ============================================= */
+.table-container {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    padding: 0px 0px 10px 0px;
+    width: 100%;
+    overflow-x: auto;
+    max-width: 1000px;
+}
+
+#user-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 6px rgba(var(--color-dark-rgb), 0.1);
+}
+
+td { font-weight: 400; }
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+}
+
+.name-ipt-edit {width: 400px;}
+.email-ipt-edit {width: 180px;}
+.age-ipt-edit {width: 50px; text-align: center;}
+.name-td {width: 410px; padding-left: 50px;}
+.email-td {width: 190px;}
+.age-td {width: 60px;}
+th:nth-child(1) {padding-left: 50px;}
+
+.action-td,
+.age-td,
+th:nth-child(3),
+th:nth-child(4) {
+    text-align: center;
+}
+
+tbody tr:hover {
+    background-color: var(--color-row-hover);
+    box-shadow: 0px 1px 8px 2px rgba(var(--color-dark-rgb), 0.4);
+    transition: 0.2s ease-in-out;
+}
+
+tbody tr:hover td {border: 1px solid var(--color-border-hover);}
