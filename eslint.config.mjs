@@ -1,26 +1,34 @@
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-import json from '@eslint/json';
-import markdown from '@eslint/markdown';
-import css from '@eslint/css';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-    { files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    // 1. Configuração base para JavaScript e Globals
+    {
+        files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
         plugins: { js },
         extends: ['js/recommended'],
         languageOptions: { globals: {...globals.browser, ...globals.node} },
-        rules: {
-            'semi': ['error', 'always'],      // exige ponto e vírgula
-            'quotes': ['error', 'single'],    // aspas simples
-            'indent': ['error', 4],           // indentação de 4 espaços
-            'no-trailing-spaces': 'error'     // remove espaços no final da linha
-        }},
+    },
+
+    // 2. Configuração recomendada para TypeScript
     tseslint.configs.recommended,
-    { files: ['**/*.json'], plugins: { json }, language: 'json/json', extends: ['json/recommended'] },
-    { files: ['**/*.jsonc'], plugins: { json }, language: 'json/jsonc', extends: ['json/recommended'] },
-    { files: ['**/*.json5'], plugins: { json }, language: 'json/json5', extends: ['json/recommended'] },
-    { files: ['**/*.md'], plugins: { markdown }, language: 'markdown/commonmark', extends: ['markdown/recommended'] },
-    { files: ['**/*.css'], plugins: { css }, language: 'css/css', extends: ['css/recommended'] },
+
+    // 3. Regras personalizadas
+    {
+        files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+        rules: {
+            // Suas outras regras
+            'semi': ['error', 'always'],
+            'quotes': ['error', 'single'],
+            'indent': ['error', 4],
+            'no-trailing-spaces': 'error',
+            'no-unused-vars': 'off',
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { 'argsIgnorePattern': '^_' }
+            ]
+        }
+    },
 ]);

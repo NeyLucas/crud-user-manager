@@ -1,11 +1,13 @@
 import mysql from 'mysql2/promise.js';
 import dotenv from 'dotenv';
+
+// Carrega as variáveis de ambiente do arquivo .env
 dotenv.config();
 
 // Cria e exporta um pool de conexões com o banco de dados MySQL.
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
-    name: process.env.MYSQL_USER,
+    user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DB
 });
