@@ -1,17 +1,20 @@
 import express from 'express';
 import userController from '../controllers/userController.js';
-import { validateUserBody } from '../middlewares/userMiddleware.js';
+import {
+  validateUserBody,
+  validateEmail,
+} from '../middlewares/userMiddleware.js';
 
 const router = express.Router();
 
 // Rota para listar todos os usuários.
 router.get('/', userController.getAll);
 
-// Rota para criar um novo usuário, com middleware de validação.
-router.post('/', validateUserBody, userController.create);
+// Rota para criar um novo usuário, com middlewares de validações.
+router.post('/', validateUserBody, validateEmail, userController.create);
 
-// Rota para atualizar um usuário, com middleware de validação.
-router.put('/:id', validateUserBody, userController.update);
+// Rota para atualizar um usuário, com middlewares de validações.
+router.put('/:id', validateUserBody, validateEmail, userController.update);
 
 // Rota para deletar um usuário.
 router.delete('/:id', userController.delete);

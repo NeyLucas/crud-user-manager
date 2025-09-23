@@ -1,10 +1,14 @@
 <!doctype html>
+<!-- Define o idioma da página como Português do Brasil -->
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRUD simples - cadastro de usuários</title>
+    <!-- Link para a folha de estilos CSS -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Importa as fontes Montserrat e Roboto do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,10 +17,12 @@
     />
   </head>
   <body>
+    <!-- Cabeçalho da página -->
     <header class="title-container">
       <h1><b>Cadastro de Usuários - CRUD simples</b></h1>
     </header>
 
+    <!-- Formulário para adicionar ou editar usuários. O ID é usado pelo JS para capturar eventos. -->
     <form id="user-form">
       <div class="form-group">
         <label for="user-name">Nome:</label>
@@ -53,6 +59,7 @@
       <button type="submit" class="submit-button">Adicionar Usuário</button>
     </form>
 
+    <!-- Contêiner da tabela que exibirá os usuários -->
     <div class="table-container">
       <table id="user-table">
         <thead>
@@ -64,11 +71,19 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Dados adicionados aqui via JS -->
+          <!-- Os dados dos usuários serão inseridos aqui dinamicamente via JavaScript -->
         </tbody>
       </table>
     </div>
 
+    <!-- Inclusão da biblioteca 'validator.js' via CDN para validações no front-end -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.15.15/validator.min.js"
+      integrity="sha512-D1UQZu1TzZtC8ZwtjDngmaTnXcPXKRdgWSqLxfsW9eY3kWcJV8AN0BP+taOmhyoOJe4io2BjkvSrskYZ2OSQ8A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Link para o arquivo de script local que contém a lógica do CRUD -->
     <script src="script.js"></script>
   </body>
 </html>

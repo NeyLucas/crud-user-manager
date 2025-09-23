@@ -1,29 +1,25 @@
-/* ============================================= */
-/*         PALETA DE CORES CENTRALIZADA          */
-/* ============================================= */
+/* Define as variáveis de cor (custom properties) para manter a consistência visual do site. */
 :root {
   /* Cores Primárias */
   --color-dark: #000000;
-  --color-dark-hover: #3a3939; /* Cor correspondente a rgb(71, 70, 70) */
+  --color-dark-hover: #3a3939;
   --color-light: #ffffff;
 
   /* Cores de Fundo e Bordas */
   --color-border: #dddddd;
   --color-border-hover: #a5a5a5;
-  --color-row-hover: #e7e7e7; /* Cor correspondente a rgb(231, 231, 231) */
+  --color-row-hover: #e7e7e7;
 
   /* Cores de Ação (Botões) */
   --color-action-edit: chocolate;
   --color-action-delete: brown;
   --color-action-save: forestgreen;
 
-  /* Para usar em sombras com transparência */
+  /* Usado em sombras com transparência. */
   --color-dark-rgb: 0, 0, 0;
 }
 
-/* ============================================= */
-/*               ESTILOS GLOBAIS                 */
-/* ============================================= */
+/* Estilos globais e reset básico aplicados a todo o documento. */
 body {
   display: flex;
   flex-direction: column;
@@ -38,6 +34,7 @@ h1,
   font-family: 'Montserrat', 'Roboto', Helvetica, Arial, sans-serif;
 }
 
+/* Estilização do formulário de cadastro. */
 #user-form {
   display: flex;
   align-items: center;
@@ -67,12 +64,14 @@ input {
   width: 100%;
 }
 
+/* Remove as setas de incremento/decremento dos inputs do tipo 'number' (Chrome, Safari). */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
+/* Garante a remoção das setas também no Firefox. */
 input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
@@ -82,9 +81,7 @@ input[type='number'] {
   width: 10vw;
 }
 
-/* ============================================= */
-/*                    BOTÕES                     */
-/* ============================================= */
+/* Estilos para os botões da aplicação. */
 .submit-button {
   font-weight: 600;
   color: var(--color-light);
@@ -127,15 +124,13 @@ input[type='number'] {
   margin-left: 5px;
 }
 
-/* ============================================= */
-/*                    TABELA                     */
-/* ============================================= */
+/* Estilização da tabela de dados e seu contêiner. */
 .table-container {
   margin-top: 30px;
   margin-bottom: 50px;
   padding: 0px 0px 10px 0px;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
   max-width: 1000px;
 }
 
@@ -156,6 +151,7 @@ td {
   border: 1px solid var(--color-border);
 }
 
+/* Largura dos inputs no modo de edição da tabela */
 .name-ipt-edit {
   width: 400px;
 }
@@ -166,6 +162,8 @@ td {
   width: 50px;
   text-align: center;
 }
+
+/* Largura das células da tabela no modo de visualização */
 .name-td {
   width: 410px;
   padding-left: 50px;
@@ -180,6 +178,7 @@ th:nth-child(1) {
   padding-left: 50px;
 }
 
+/* Centraliza o conteúdo de colunas específicas. */
 .action-td,
 .age-td,
 th:nth-child(3),
@@ -187,6 +186,7 @@ th:nth-child(4) {
   text-align: center;
 }
 
+/* Efeito de hover nas linhas da tabela */
 tbody tr:hover {
   background-color: var(--color-row-hover);
   box-shadow: 0px 1px 8px 2px rgba(var(--color-dark-rgb), 0.4);

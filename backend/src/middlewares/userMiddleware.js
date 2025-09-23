@@ -1,3 +1,5 @@
+import isEmail from '../../node_modules/validator/lib/isEmail.js';
+
 // Middleware para validar o corpo da requisição ao criar/atualizar um usuário.
 export function validateUserBody(req, res, next) {
   const { body } = req;
@@ -18,5 +20,15 @@ export function validateUserBody(req, res, next) {
   }
 
   // Se a validação passar, chama o próximo middleware ou controller.
+  next();
+}
+
+export function validateEmail(req, res, next) {
+  const { email } = req.body;
+
+  // Função para verificar no backend se o email da requisição é válido.
+  if (!isEmail(email)) {
+    return res.status(400).json({ error: 'Email digitado é inválido!' });
+  }
   next();
 }
