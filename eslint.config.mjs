@@ -4,31 +4,28 @@ import tseslint from 'typescript-eslint';
 import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-    // 1. Configuração base para JavaScript e Globals
-    {
-        files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-        plugins: { js },
-        extends: ['js/recommended'],
-        languageOptions: { globals: {...globals.browser, ...globals.node} },
-    },
+  // 1. Configuração base para JavaScript e Globals
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    plugins: { js },
+    extends: ['js/recommended'],
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  },
 
-    // 2. Configuração recomendada para TypeScript
-    tseslint.configs.recommended,
+  // 2. Configuração recomendada para TypeScript
+  tseslint.configs.recommended,
 
-    // 3. Regras personalizadas
-    {
-        files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-        rules: {
-            // Suas outras regras
-            'semi': ['error', 'always'],
-            'quotes': ['error', 'single'],
-            'indent': ['error', 4],
-            'no-trailing-spaces': 'error',
-            'no-unused-vars': 'off',
-            '@typescript-eslint/no-unused-vars': [
-                'error',
-                { 'argsIgnorePattern': '^_' }
-            ]
-        }
+  // 3. Regras personalizadas
+  {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
+    rules: {
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
     },
+  },
+
+  'prettier',
 ]);
