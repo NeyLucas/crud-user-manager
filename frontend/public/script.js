@@ -56,6 +56,12 @@ async function renderUsers() {
     // Verifica se a resposta da requisição não foi bem-sucedida (ex: status 404 ou 500).
     await checkResponse(response);
 
+    // Verifica caso a API não mande dados (o banco possivelmente está vazio)
+    if (response.statusText === 'No Content') {
+      tableTBody.innerHTML = '';
+      return;
+    }
+
     // Se a resposta foi bem-sucedida, converte o corpo da resposta para JSON.
     const users = await response.json();
 
@@ -279,8 +285,7 @@ async function handleUserSubmit(e) {
     userNameInput.focus();
 
     renderUsers();
-
-    alert(`Usuário com ID: ${user.insertId} adicionado com sucesso!`);
+    alert(`Usuário com ID: ${user.userId} adicionado com sucesso!`);
   } catch (err) {
     alert(err.message);
     console.error(err);
