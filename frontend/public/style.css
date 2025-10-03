@@ -1,44 +1,56 @@
-/* Define as variáveis de cor (custom properties) para manter a consistência visual do site. */
+/*
+ * Variáveis CSS 
+ * Centraliza e padroniza as cores de toda a aplicação para consistência visual.
+ */
 :root {
-  /* Cores Primárias */
+  /* Cores Primárias. */
   --color-dark: #000000;
-  --color-dark-hover: #3a3939;
+  --color-gray: #3a3939;
   --color-light: #ffffff;
 
-  /* Cores de Fundo e Bordas */
+  /* Cores Úteis. */
   --color-border: #dddddd;
-  --color-border-hover: #a5a5a5;
   --color-row-hover: #e7e7e7;
 
-  /* Cores de Ação (Botões) */
-  --color-action-edit: chocolate;
-  --color-action-delete: brown;
-  --color-action-save: forestgreen;
+  /* Cores de Ação (Botões). */
+  --color-action-edit: #d2691e;
+  --color-action-delete: #a52a2a;
+  --color-action-save: #228b22;
+  --color-action-back: #727171;
 
-  /* Usado em sombras com transparência. */
+  /* Usado em sombras. */
   --color-dark-rgb: 0, 0, 0;
 }
 
-/* Estilos globais e reset básico aplicados a todo o documento. */
+/* Reset básico universal: Aplica box-sizing para facilitar o layout e define a fonte padrão. */
+* {
+  box-sizing: border-box;
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+}
+
+/*
+ * Estilos Globais
+ */
 body {
+  /* Centraliza o conteúdo (formulário, tabela) na página. */
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   color: var(--color-dark);
 }
 
-h1,
-.submit-button,
-.action-btn {
-  font-family: 'Montserrat', 'Roboto', Helvetica, Arial, sans-serif;
-}
-
-/* Estilização do formulário de cadastro. */
+/*
+ * Estilização do Formulário de Cadastro (#user-form)
+ */
 #user-form {
+  /* Define o tamanho e centraliza o conteúdo interno. */
+  width: 400px;
+  height: 300px;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
+  /* Estilos visuais: borda, arredondamento e sombra. */
   border-radius: 20px;
   border: solid var(--color-dark) 1px;
   padding: 20px;
@@ -46,46 +58,69 @@ h1,
 }
 
 .form-group {
+  /* Contêiner para o label e input, garantindo o espaçamento correto. */
+  width: 300px;
+  height: 100px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   margin: 5px;
 }
 
+/* Define tamanho de fonte comum para inputs e labels. */
 label,
 input {
-  font-size: 12pt;
+  font-size: 1.05rem;
 }
+
 label {
-  width: 70px;
-}
-input {
-  height: 25px;
+  /* Estilização específica do texto do label. */
   width: 100%;
-}
-
-/* Remove as setas de incremento/decremento dos inputs do tipo 'number' (Chrome, Safari). */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Garante a remoção das setas também no Firefox. */
-input[type='number'] {
-  -moz-appearance: textfield;
-  appearance: textfield;
+  margin-bottom: 3px;
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
 }
 
 .form-input {
-  width: 10vw;
+  /* Placeholder de estilização, garantindo que o input ocupe todo o espaço disponível. */
+  width: 100%;
+  height: 100%;
 }
 
-/* Estilos para os botões da aplicação. */
+input {
+  /* Define a altura padrão para todos os campos de input. */
+  height: 30px;
+  width: 100%;
+}
+
+/*
+ * Reset de Inputs Numéricos
+ * Remove as setas de incremento/decremento dos inputs do tipo 'number' para uma UI mais limpa.
+ */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Opera */
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Padrão moderno */
+}
+
+/*
+ * Estilos para Botões (Geral e Ações Específicas)
+ */
+
+/* Botão Principal */
 .submit-button {
+  /* Tamanho, fonte e cores. */
+  width: 300px;
+  height: 60px;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-light);
   background-color: var(--color-dark);
+  /* Espaçamento e formato. */
   margin: 15px 0 5px 0;
   padding: 10px;
   border-radius: 10px;
@@ -94,21 +129,24 @@ input[type='number'] {
 }
 
 .submit-button:hover {
-  background-color: var(--color-dark-hover);
+  /* Efeito visual ao passar o mouse. */
+  background-color: var(--color-gray);
   box-shadow: 0px 1px 8px 2px rgba(var(--color-dark-rgb), 0.4);
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out; /* Transição suave para a sombra e cor. */
 }
 
+/* Estilos Comuns para Botões de Ação na Tabela (Editar, Deletar, etc.) */
 .action-btn {
   font-weight: 550;
-  height: 30px;
-  width: 65px;
+  height: 40px;
+  width: 80px;
   color: var(--color-light);
   border-radius: 10px;
   border: none;
   cursor: pointer;
 }
 
+/* Cores específicas baseadas nas variáveis CSS. */
 .edit-btn {
   background-color: var(--color-action-edit);
 }
@@ -120,17 +158,19 @@ input[type='number'] {
   background-color: var(--color-action-save);
 }
 .back-btn {
-  background-color: var(--color-action-delete);
+  background-color: var(--color-action-back);
   margin-left: 5px;
 }
 
-/* Estilização da tabela de dados e seu contêiner. */
+/*
+ * Estilização da Tabela de Dados
+ */
+
 .table-container {
+  /* Contêiner que envolve a tabela, controlando margens, largura máxima e scroll horizontal. */
   margin-top: 30px;
   margin-bottom: 50px;
-  padding: 0px 0px 10px 0px;
-  width: 100%;
-  overflow-x: auto; /* Permite rolagem horizontal em telas pequenas */
+  overflow-x: auto;
   max-width: 1000px;
 }
 
@@ -140,59 +180,58 @@ input[type='number'] {
   box-shadow: 0 2px 6px rgba(var(--color-dark-rgb), 0.1);
 }
 
-td {
-  font-weight: 400;
+/* Estilos para o Cabeçalho da Tabela (th) */
+th {
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-light);
+  border: none;
+  background-color: var(--color-gray);
 }
 
+/* Estilos para as Células de Dados (td) */
+td {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* Estilos comuns de padding e alinhamento para o cabeçalho e células. */
 th,
 td {
   text-align: left;
   padding: 10px;
-  border: 1px solid var(--color-border);
 }
 
-/* Largura dos inputs no modo de edição da tabela */
-.name-ipt-edit {
-  width: 400px;
+/* Linhas da Tabela (tbody tr) */
+tbody tr {
+  border-bottom: 2px solid var(--color-border); /* Separador de linha */
 }
-.email-ipt-edit {
-  width: 180px;
-}
-.age-ipt-edit {
-  width: 50px;
+
+/* Alinhamento de Texto Específico por Coluna. */
+th:nth-child(3), /* Idade */
+th:nth-child(4), /* Ações */
+.age-td,
+.action-td {
   text-align: center;
 }
 
-/* Largura das células da tabela no modo de visualização */
+/* Largura das colunas para otimizar a visualização dos dados. */
 .name-td {
-  width: 410px;
-  padding-left: 50px;
+  width: 475px;
 }
 .email-td {
-  width: 190px;
+  width: 275px;
+  word-break: break-all; /* Garante que e-mails longos não quebrem o layout da coluna. */
 }
 .age-td {
-  width: 60px;
+  width: 50px;
 }
-th:nth-child(1) {
-  padding-left: 50px;
-}
-
-/* Centraliza o conteúdo de colunas específicas. */
-.action-td,
-.age-td,
-th:nth-child(3),
-th:nth-child(4) {
-  text-align: center;
+.action-td {
+  width: 200px;
 }
 
-/* Efeito de hover nas linhas da tabela */
+/* Efeito visual ao passar o mouse sobre o registro. */
 tbody tr:hover {
   background-color: var(--color-row-hover);
-  box-shadow: 0px 1px 8px 2px rgba(var(--color-dark-rgb), 0.4);
-  transition: 0.2s ease-in-out;
-}
-
-tbody tr:hover td {
-  border: 1px solid var(--color-border-hover);
 }
