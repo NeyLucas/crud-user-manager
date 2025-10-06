@@ -1,6 +1,33 @@
 import userRepository from '../repositories/userRepository.js';
 
 export default {
+  // Função auxiliar para verificar se o usuário a ser atualizado/deletado realmente existe.
+  async _checkUserExistsById(id) {
+    const idExists = await userRepository.findById(id);
+    if (!idExists) {
+      const err = new Error(`Não existe cadastro com ID: ${id}`);
+      err.statusCode = 404; // Not Found
+      throw err;
+    }
+  },
+
+  // Função auxilixar para verificar se email já foi cadastrado.
+  async _checkEmailIsAvaliable(email, currentUserId = null) {
+    const emailExists = await userRepository.findByEmail(email);
+    currentUserId = parseInt(currentUserId, 10);
+    // Se id for nulo, o objetivo é a criação de um novo usuário com email repetido.
+    // Se id do usuario cujo o email foi retornado for diferente do id enviado nos params,
+    // o usuario não poderá atualizar, pois é de outro usuário.
+    if (
+      emailExists &&
+      (currentUserId === null || emailExists.id !== currentUserId)
+    ) {
+      const err = new Error('Email já cadastrado!');
+      err.statusCode = 409; // Conflict
+      throw err;
+    }
+  },
+
   // Lista todos os usuários.
   async listUsers() {
     const users = await userRepository.findAll();
@@ -10,12 +37,7 @@ export default {
   // Cria um novo usuário, aplicando regras de negócio.
   async createUser(user) {
     // Regra: não permitir criar usuários com emails duplicados.
-    const emailExists = await userRepository.findByEmail(user.email);
-    if (emailExists) {
-      const err = new Error('Email já cadastrado!');
-      err.statusCode = 409; // Conflict
-      throw err;
-    }
+    await this._checkEmailIsAvaliable(user.email);
 
     const userId = await userRepository.create(user);
     return { userId };
@@ -23,13 +45,9 @@ export default {
 
   // Atualiza um usuário.
   async updateUser(id, user) {
+    await this._checkEmailIsAvaliable(user.email, id);
     // Regra: verificar se o usuário a ser atualizado realmente existe.
-    const idExists = await userRepository.findById(id);
-    if (!idExists) {
-      const err = new Error(`Não existe cadastro com ID: ${id}`);
-      err.statusCode = 404; // Not Found
-      throw err;
-    }
+    await this._checkUserExistsById(id);
 
     const userUpdated = await userRepository.update(id, user);
     return userUpdated;
@@ -38,12 +56,7 @@ export default {
   // Deleta um usuário.
   async deleteUser(id) {
     // Regra: verificar se o usuário a ser deletado realmente existe.
-    const idExists = await userRepository.findById(id);
-    if (!idExists) {
-      const err = new Error(`Não existe cadastro com ID: ${id}`);
-      err.statusCode = 404; // Not Found
-      throw err;
-    }
+    await this._checkUserExistsById(id);
 
     const deletedUser = await userRepository.delete(id);
     return deletedUser;
