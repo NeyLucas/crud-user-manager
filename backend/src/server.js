@@ -1,16 +1,16 @@
 import { testDatabaseConnection } from './config/db.js';
 import app from './app.js';
-const PORT = 8081;
+import dotenv from 'dotenv';
+dotenv.config();
 
-// Função para testar e inicializar o servidor.
+// Define fallback de segurança.
+const PORT = process.env.PORT || 3000;
+
 async function startServer() {
   await testDatabaseConnection();
 
-  // Inicia o servidor Express na porta especificada.
-  app.listen(PORT, () =>
-    console.log(`[Server] Servidor rodando na porta ${PORT}`),
-  );
+  app.listen(PORT);
 }
 
-// Inicia o processo.
+// Inicializa servidor.
 startServer();
