@@ -1,8 +1,7 @@
+// Middleware para logar no console os detalhes de cada requisição recebida pela API.
 export const logger = (req, _res, next) => {
-  // Retira o metodo e a ulr da requisição.
   const { method, url } = req;
 
-  // Converte a data para o padrão ISO.
   const timestamp = new Date().toISOString();
 
   // Loga para fins de debug.

@@ -7,7 +7,7 @@ export function validateUserBody(req, res, next) {
   // Define um limite de caracteres para os campos de texto.
   const MAX_LENGTH = 100;
 
-  // Valida se o nome foi fornecido e é uma string.
+  // Valida se o campo foi fornecido e é corretamente do seu tipo.
   if (!name || typeof name !== 'string') {
     return res.status(400).json({ error: 'Nome é obrigatório!' });
   }
@@ -19,12 +19,11 @@ export function validateUserBody(req, res, next) {
       .json({ error: `Nome muito longo (máx ${MAX_LENGTH} caracteres)!` });
   }
 
-  // Valida se o email foi fornecido e é uma string.
   if (!email || typeof email !== 'string') {
     return res.status(400).json({ error: 'Email é obrigatório!' });
   }
 
-  // Valida se a idade foi fornecida, é um número e não é negativa.
+  // Aqui se valida também os limites permitidos de idade.
   if (age === undefined || typeof age !== 'number' || age <= 0 || age > 150) {
     return res.status(400).json({ error: 'Idade faltando ou inválida!' });
   }

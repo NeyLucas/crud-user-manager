@@ -219,10 +219,13 @@ th:nth-child(4), /* Ações */
 /* Largura das colunas para otimizar a visualização dos dados. */
 .name-td {
   width: 475px;
+  max-width: 475px;
+  overflow-wrap: break-word; /* Garante que valores longos não quebrem o layout da coluna. */
 }
 .email-td {
   width: 275px;
-  word-break: break-all; /* Garante que e-mails longos não quebrem o layout da coluna. */
+  max-width: 275px;
+  overflow-wrap: break-word;
 }
 .age-td {
   width: 50px;

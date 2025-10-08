@@ -78,7 +78,6 @@ export default {
         [name, email, age],
       );
 
-      // Retorna o ID do usuário recém-criado.
       return result.insertId;
     } finally {
       if (connection) {
