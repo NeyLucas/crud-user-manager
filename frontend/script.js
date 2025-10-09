@@ -1,6 +1,7 @@
 // URL base da API para todas as requisições relacionadas a usuários.
-const API_BASE_URL = 'http://localhost:8081/users';
-
+console.log('variaveis: ', import.meta.env);
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+console.log('API_BASE_URL: ', API_BASE_URL);
 // Seleciona os principais elementos do DOM com os quais vamos interagir.
 const userForm = document.querySelector('#user-form');
 const tableTBody = document.querySelector('#user-table tbody');
