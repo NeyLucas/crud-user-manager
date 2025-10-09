@@ -1,2 +1,23 @@
-node_modules
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Diretórios de dependencias
+node_modules/
+
+# npm cache
+.npm
+
+# varíaveis de ambiente
 .env
+.env.*
+!.env.example
+
+# artefatos de build
+dist/
+
+# arquivos Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.vite/
