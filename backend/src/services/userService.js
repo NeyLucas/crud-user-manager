@@ -46,7 +46,8 @@ export default {
   // Atualiza um usuário.
   async updateUser(id, user) {
     await this._checkEmailIsAvaliable(user.email, id);
-    // Regra: verificar se o usuário a ser atualizado realmente existe.
+
+    // Regra: verificar se o usuário realmente existe.
     await this._checkUserExistsById(id);
 
     const userUpdated = await userRepository.update(id, user);
@@ -55,7 +56,6 @@ export default {
 
   // Deleta um usuário.
   async deleteUser(id) {
-    // Regra: verificar se o usuário a ser deletado realmente existe.
     await this._checkUserExistsById(id);
 
     const deletedUser = await userRepository.delete(id);

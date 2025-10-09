@@ -36,7 +36,7 @@ app.use(express.json());
 // Agrupa todas as rotas de usuários sob o prefixo '/users'.
 app.use('/users', userRoutes);
 
-// Middleware de tratamento de erros. Deve ser o último a ser registrado.
+// Middleware de tratamento de erros.
 app.use(userHandler);
 
 export default app;

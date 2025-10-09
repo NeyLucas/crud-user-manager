@@ -1,5 +1,5 @@
 // URL base da API para todas as requisições relacionadas a usuários.
-const API_BASE_URL = 'http://localhost:8081/users';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Seleciona os principais elementos do DOM com os quais vamos interagir.
 const userForm = document.querySelector('#user-form');
@@ -25,8 +25,8 @@ function buildRowContentHTML(name, email, age) {
         <td class='email-td'>${email}</td>
         <td class='age-td'>${age}</td>
         <td class='action-td'>
-            <button class='action-btn edit-btn' onclick='enableToEditUser(this);'>Editar</button>
-            <button class='action-btn delete-btn' onclick='deleteUser(this);'>Excluir</button>
+            <button class='action-btn edit-btn'>Editar</button>
+            <button class='action-btn delete-btn'>Excluir</button>
         </td>
     `;
 }
@@ -48,7 +48,6 @@ async function checkResponse(response) {
  * Esta função será chamada quando a página carregar para popular a tabela inicialmente.
  */
 async function renderUsers() {
-  // O bloco try...catch é usado para lidar com possíveis erros na requisição (ex: API offline).
   try {
     // Faz uma requisição GET para a API e aguarda a resposta.
     const response = await fetch(API_BASE_URL);
@@ -56,7 +55,7 @@ async function renderUsers() {
     // Verifica se a resposta da requisição não foi bem-sucedida (ex: status 404 ou 500).
     await checkResponse(response);
 
-    // Verifica caso a API não mande dados (o banco possivelmente está vazio)
+    // Verifica caso a API não mande dados (o banco possivelmente está vazio).
     if (response.statusText === 'No Content') {
       tableTBody.innerHTML = '';
       return;
@@ -68,11 +67,10 @@ async function renderUsers() {
     // Limpa o corpo da tabela para evitar duplicar dados ao renderizar novamente.
     tableTBody.innerHTML = '';
 
-    // Itera sobre cada usuário recebido da API.
     users.forEach((user) => {
-      // Cria um novo elemento de linha (tr) para cada usuário.
       const newRow = document.createElement('tr');
-      // Define um 'data-attribute' na linha com o ID do usuário. Isso é crucial para as operações de update e delete.
+      // Define um 'data-attribute' na linha com o ID do usuário.
+      // Isso é crucial para as operações de update e delete.
       newRow.dataset.user = user.id;
       // Constrói o HTML interno da linha com os dados do usuário.
       newRow.innerHTML = buildRowContentHTML(user.name, user.email, user.age);
@@ -80,10 +78,7 @@ async function renderUsers() {
       tableTBody.appendChild(newRow);
     });
   } catch (err) {
-    // Se ocorrer qualquer erro no bloco 'try', ele será capturado aqui.
-    // Exibe um alerta para o usuário com a mensagem de erro.
     alert(err.message);
-    // Loga o erro completo no console para fins de depuração.
     console.error(err);
   }
 }
@@ -146,12 +141,11 @@ async function saveEdit(button) {
     // Envia uma requisição PUT com os dados a serem atualizados
     // para o endpoint específico do usuário.
     const response = await fetch(`${API_BASE_URL}/${userId}`, {
-      method: 'PUT', // Especifica o método HTTP para criação.
-      headers: { 'Content-Type': 'application/json' }, // Informa à API que o corpo é JSON.
-      body: JSON.stringify(updatedUser), // Converte o objeto JS em uma string JSON.
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedUser),
     });
 
-    // Se a API retornar um erro (ex: email já existe), lança uma exceção.
     await checkResponse(response);
 
     // Recarrega os dados da tabela a partir da API para garantir que a UI
@@ -163,7 +157,6 @@ async function saveEdit(button) {
 
     alert('Dados do usuário atualizados com sucesso!');
   } catch (err) {
-    // Exibe erros de rede ou da API para o usuário.
     alert(err.message);
     console.error(err);
   }
@@ -236,8 +229,8 @@ function enableToEditUser(button) {
         <td class='email-td'><input type='email' placeholder='Email' class='form-input-edit email-ipt-edit' value='${oldEmailValue}'></td>
         <td class='age-td'><input type='number' min='1' max='150' placeholder='Idade' class='form-input-edit age-ipt-edit' value='${oldAgeValue}'></td>
         <td class='action-td'>
-            <button class='action-btn save-btn' onclick='saveEdit(this);'>Salvar</button>
-            <button class='action-btn back-btn' onclick='backRow(this);'>Voltar</button>
+            <button class='action-btn save-btn'>Salvar</button>
+            <button class='action-btn back-btn'>Voltar</button>
         </td>
     `;
 }
@@ -291,6 +284,27 @@ async function handleUserSubmit(e) {
     console.error(err);
   }
 }
+
+// 'escutador' de eventos que irá capturar o botão de ação clicado pelo usuário.
+tableTBody.addEventListener('click', (event) => {
+  // Grava o botão clicado.
+  const target = event.target;
+
+  // Verifica as condições se o botão clicado é algum dos que pertencem a essas classes.
+  if (target.matches('.edit-btn')) {
+    // Chama a função que executa a ação do respectivo botão.
+    enableToEditUser(target);
+  }
+  if (target.matches('.delete-btn')) {
+    deleteUser(target);
+  }
+  if (target.matches('.save-btn')) {
+    saveEdit(target);
+  }
+  if (target.matches('.back-btn')) {
+    backRow(target);
+  }
+});
 
 // Adiciona um ouvinte de eventos quando a página é carregada ou o formulário é enviado.
 document.addEventListener('DOMContentLoaded', renderUsers);
