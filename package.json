@@ -17,7 +17,9 @@
     "build": "npm run build --workspace=frontend",
     "up": "docker compose up -d",
     "down": "docker compose down",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:setup": "docker exec -i mysql mysql -u root -proot < backend/database/schema.sql",
+    "db:setup:local": "mysql -u root -p --host 127.0.0.1 < backend/database/schema.sql"
   },
   "keywords": [],
   "author": "",
@@ -26,7 +28,7 @@
     "@eslint/css": "^0.11.0",
     "@eslint/js": "^9.35.0",
     "@eslint/json": "^0.13.2",
-    "@eslint/markdown": "^7.2.0",
+    "@eslint/markdown": "^7.4.0",
     "concurrently": "^9.2.1",
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
