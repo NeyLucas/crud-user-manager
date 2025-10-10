@@ -1,6 +1,7 @@
 import { isEmail } from 'validator';
+import api from './api.js';
 
-// URL base da API para todas as requisições relacionadas a usuários.
+// TODO - remover essa linha após implementar o código no módulo ui.js
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Seleciona os principais elementos do DOM com os quais vamos interagir.
@@ -34,18 +35,6 @@ function buildRowContentHTML(name, email, age) {
 }
 
 /**
- * Verifica a resposta de uma requisição fetch. Se a resposta não for 'ok',
- * lê a mensagem de erro da API e lança um erro, interrompendo a execução.
- * @param {Response} response O objeto de resposta da função fetch.
- */
-async function checkResponse(response) {
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.error || 'Ocorreu um erro na API.');
-  }
-}
-
-/**
  * Função assíncrona para buscar os usuários da API e renderizá-los na tabela.
  * Esta função será chamada quando a página carregar para popular a tabela inicialmente.
  */
@@ -53,9 +42,6 @@ async function renderUsers() {
   try {
     // Faz uma requisição GET para a API e aguarda a resposta.
     const response = await fetch(API_BASE_URL);
-
-    // Verifica se a resposta da requisição não foi bem-sucedida (ex: status 404 ou 500).
-    await checkResponse(response);
 
     // Verifica caso a API não mande dados (o banco possivelmente está vazio).
     if (response.statusText === 'No Content') {
@@ -85,6 +71,7 @@ async function renderUsers() {
   }
 }
 
+// TODO - transferir essas checagens para o módulo validation.js
 /**
  * Valida se o formato do email é válido usando a biblioteca validator.
  * @param {string} email O email a ser validado.
@@ -140,15 +127,8 @@ async function saveEdit(button) {
   const updatedUser = { name, email, age };
 
   try {
-    // Envia uma requisição PUT com os dados a serem atualizados
-    // para o endpoint específico do usuário.
-    const response = await fetch(`${API_BASE_URL}/${userId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedUser),
-    });
-
-    await checkResponse(response);
+    // Chama a função correspondente que irá se comunicar comunicar com a API.
+    await api.updateUser(updatedUser, userId);
 
     // Recarrega os dados da tabela a partir da API para garantir que a UI
     // esteja perfeitamente sincronizada com o banco de dados.
@@ -191,13 +171,7 @@ async function deleteUser(button) {
   // Confirmação de exclusão para evitar erros por parte do usuário.
   if (confirm('Tem certeza que deseja excluir este usuário ?')) {
     try {
-      // Faz uma requisição DELETE para o endpoint específico do usuário.
-      const response = await fetch(`${API_BASE_URL}/${userId}`, {
-        method: 'DELETE',
-      });
-
-      await checkResponse(response);
-
+      await api.deleteUser(userId);
       renderUsers();
       alert(`Usuário com ID: ${userId} removido com sucesso!`);
     } catch (err) {
@@ -259,32 +233,20 @@ async function handleUserSubmit(e) {
   const newUser = { name, email, age };
 
   try {
-    // Faz uma requisição POST com os dados a serem adicionados.
-    const response = await fetch(API_BASE_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newUser),
-    });
-
-    await checkResponse(response);
-
     // Extrai o retorno da API para usar na mensagem de sucesso.
-    const user = await response.json();
-
-    // Limpa o formulário após o sucesso.
-    userForm.reset();
-
-    // Foca no input de nome para fins de UX mais adequada.
-    userNameInput.focus();
-
+    const user = await api.createUser(newUser);
     renderUsers();
+
+    // Limpa o formulário após o sucesso e alerta o usuário.
+    userForm.reset();
     alert(`Usuário com ID: ${user.userId} adicionado com sucesso!`);
   } catch (err) {
     alert(err.message);
     console.error(err);
   }
+
+  // Foca no input de nome para fins de UX mais adequada.
+  userNameInput.focus();
 }
 
 // 'escutador' de eventos que irá capturar o botão de ação clicado pelo usuário.
