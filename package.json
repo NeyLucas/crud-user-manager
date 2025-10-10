@@ -17,7 +17,9 @@
     "build": "npm run build --workspace=frontend",
     "up": "docker compose up -d",
     "down": "docker compose down",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:setup": "docker exec -i mysql mysql -u root -proot < backend/database/schema.sql",
+    "db:setup:local": "mysql -u root -p --host 127.0.0.1 < backend/database/schema.sql"
   },
   "keywords": [],
   "author": "",
