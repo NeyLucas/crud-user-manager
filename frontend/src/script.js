@@ -1,3 +1,5 @@
+import { isEmail } from 'validator';
+
 // URL base da API para todas as requisições relacionadas a usuários.
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -84,12 +86,12 @@ async function renderUsers() {
 }
 
 /**
- * Valida se o formato do email é válido usando a biblioteca validator.js.
+ * Valida se o formato do email é válido usando a biblioteca validator.
  * @param {string} email O email a ser validado.
  * @returns {boolean} Retorna true se o email for inválido.
  */
 function checkInvalidEmail(email) {
-  if (!validator.isEmail(email)) {
+  if (!isEmail(email)) {
     alert('Por favor, digite um e-mail válido.');
     return true;
   }
