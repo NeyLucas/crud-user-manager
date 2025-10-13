@@ -1,0 +1,142 @@
+import api from './api.js';
+import * as validation from './validation.js';
+import * as ui from './ui.js';
+
+// Objeto para armazenar o estado original de uma linha que está sendo editada.
+// A chave é o ID do usuário (vindo da API) e o valor é o seu HTML original.
+let HTMLEditedRows = {};
+
+function formatEditedInputs(button) {
+  // Encontra a linha (tr) que está sendo editada.
+  const editedRow = button.closest('tr');
+  const userId = editedRow.dataset.user; // Pega o ID do banco.
+
+  // Coleta e formata os novos valores dos inputs dentro da linha.
+  const inputs = editedRow.querySelectorAll('.form-input-edit');
+  const name = inputs[0].value.trim();
+  const email = inputs[1].value.trim();
+  const age = parseInt(inputs[2].value.trim(), 10);
+
+  // Prepara o objeto para ser enviado no corpo da requisição.
+  const updatedUser = { name, email, age };
+
+  return { updatedUser, userId };
+}
+
+export default {
+  /**
+   * Salva as alterações feitas em uma linha da tabela.
+   * @param {HTMLButtonElement} button O botão "Salvar" que foi clicado.
+   */
+  async saveEdit(button) {
+    const { updatedUser, userId } = formatEditedInputs(button);
+
+    // Valida os novos dados.
+    if (!validation.areInputsValid(updatedUser)) {
+      return; // Interrompe a função se os dados forem inválidos.
+    }
+
+    try {
+      // Chama a função correspondente que irá se comunicar comunicar com a API.
+      await api.updateUser(updatedUser, userId);
+
+      // Atualiza a UI construindo o HTML com os novos valores.
+      ui.buildRowContentHTML(updatedUser);
+
+      // Limpa o backup da linha, pois a edição foi concluída.
+      delete HTMLEditedRows[userId];
+      alert('Dados do usuário atualizados com sucesso!');
+    } catch (err) {
+      alert(err.message);
+      console.error(err);
+    }
+  },
+
+  /**
+   * Cancela a edição e restaura o conteúdo original da linha.
+   * @param {HTMLButtonElement} button O botão "Voltar" que foi clicado.
+   */
+  cancelEdit(button) {
+    const rowToBack = button.closest('tr');
+    const keyDataUser = rowToBack.dataset.user; // Pega o identificador único da linha.
+
+    // Restaura o HTML original que foi salvo no objeto HTMLEditedRows.
+    const oldHTML = HTMLEditedRows[keyDataUser];
+    rowToBack.innerHTML = oldHTML;
+
+    // Remove a entrada do objeto de backup.
+    delete HTMLEditedRows[keyDataUser];
+  },
+
+  /**
+   * Remove um usuário do registro via API.
+   * @param {HTMLButtonElement} button O botão "Excluir" que foi clicado.
+   */
+  async deleteUser(button) {
+    const rowToDelete = button.closest('tr');
+    const userId = rowToDelete.dataset.user;
+
+    // Confirmação de exclusão para evitar erros por parte do usuário.
+    if (confirm('Tem certeza que deseja excluir este usuário ?')) {
+      try {
+        await api.deleteUser(userId);
+        rowToDelete.remove(); // Remove a linha selecionada.
+        alert(`Usuário com ID: ${userId} removido com sucesso!`);
+      } catch (err) {
+        alert(err.message);
+        console.error(err);
+      }
+    }
+  },
+
+  /**
+   * Habilita o modo de edição para uma linha específica da tabela.
+   * @param {HTMLButtonElement} button O botão "Editar" que foi clicado.
+   */
+  editUser(button) {
+    const rowToEdit = button.closest('tr');
+    const keyDataUser = rowToEdit.dataset.user; // Identificador da linha.
+
+    // Salva o HTML atual da linha antes de transformá-la em inputs.
+    const valueHTML = rowToEdit.innerHTML;
+    HTMLEditedRows[keyDataUser] = valueHTML;
+
+    // Pega os valores atuais das células.
+    const tableData = rowToEdit.querySelectorAll('td');
+    const oldNameValue = tableData[0].textContent;
+    const oldEmailValue = tableData[1].textContent;
+    const oldAgeValue = tableData[2].textContent;
+
+    // Substitui o conteúdo da linha por inputs preenchidos com os valores antigos.
+    rowToEdit.innerHTML = `
+          <td class='name-td'><input type='text' placeholder='Nome' class='form-input-edit name-ipt-edit' value='${oldNameValue}'></td>
+          <td class='email-td'><input type='email' placeholder='Email' class='form-input-edit email-ipt-edit' value='${oldEmailValue}'></td>
+          <td class='age-td'><input type='number' min='1' max='150' placeholder='Idade' class='form-input-edit age-ipt-edit' value='${oldAgeValue}'></td>
+          <td class='action-td'>
+              <button class='action-btn save-btn'>Salvar</button>
+              <button class='action-btn back-btn'>Voltar</button>
+          </td>
+      `;
+  },
+
+  /**
+   * Registra um novo usuário a partir do formulário enviado.
+   * @param {Object} newUser objeto contendo as informações do usuário a ser adicionado.
+   * @returns {boolean} retorna true se foi o usuário foi criado com sucesso.
+   */
+  async createUser(newUser) {
+    if (!validation.areInputsValid(newUser)) {
+      return;
+    }
+    try {
+      // Extrai o retorno da API para usar na mensagem de sucesso.
+      const user = await api.createUser(newUser);
+      ui.buildRowContentHTML(newUser);
+      alert(`Usuário com ID: ${user.userId} adicionado com sucesso!`);
+      return true;
+    } catch (err) {
+      alert(err.message);
+      console.error(err);
+    }
+  },
+};

@@ -28,6 +28,6 @@ function areInputsFilled(name, email, age) {
   return true;
 }
 
-export function areInputsValid(name, email, age) {
+export function areInputsValid({ name, email, age }) {
   return areInputsFilled(name, email, age) && isEmailValid(email);
 }

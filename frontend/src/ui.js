@@ -7,7 +7,7 @@ import api from './api.js';
  * @param {string} age Idade do usuário.
  * @returns {string} O HTML interno de uma linha (tr).
  */
-function buildRowContentHTML(name, email, age) {
+export function buildRowContentHTML({ name, email, age }) {
   return `
         <td class='name-td'>${name}</td>
         <td class='email-td'>${email}</td>
@@ -24,6 +24,7 @@ function buildRowContentHTML(name, email, age) {
  * Esta função será chamada quando a página carregar para popular a tabela inicialmente.
  */
 export async function renderUsers(tableTBody) {
+  // Recebe todos os usuários vindos da API.
   const users = await api.getAllUsers();
 
   // Limpa o corpo da tabela para evitar duplicar dados ao renderizar novamente.
@@ -34,8 +35,11 @@ export async function renderUsers(tableTBody) {
     // Define um 'data-attribute' na linha com o ID do usuário.
     // Isso é crucial para as operações de update e delete.
     newRow.dataset.user = user.id;
+
+    const newUser = { name: user.name, email: user.email, age: user.age };
+
     // Constrói o HTML interno da linha com os dados do usuário.
-    newRow.innerHTML = buildRowContentHTML(user.name, user.email, user.age);
+    newRow.innerHTML = buildRowContentHTML(newUser);
     // Adiciona a nova linha ao corpo da tabela.
     tableTBody.appendChild(newRow);
   });
