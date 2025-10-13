@@ -58,7 +58,7 @@ async function saveEdit(button) {
  * Cancela a edição e restaura o conteúdo original da linha.
  * @param {HTMLButtonElement} button O botão "Voltar" que foi clicado.
  */
-function backRow(button) {
+function cancelEdit(button) {
   const rowToBack = button.closest('tr');
   const keyDataUser = rowToBack.dataset.user; // Pega o identificador único da linha.
 
@@ -95,7 +95,7 @@ async function deleteUser(button) {
  * Habilita o modo de edição para uma linha específica da tabela.
  * @param {HTMLButtonElement} button O botão "Editar" que foi clicado.
  */
-function enableToEditUser(button) {
+function editUser(button) {
   const rowToEdit = button.closest('tr');
   const keyDataUser = rowToEdit.dataset.user; // Identificador da linha.
 
@@ -164,7 +164,7 @@ tableTBody.addEventListener('click', (event) => {
   // Verifica as condições se o botão clicado é algum dos que pertencem a essas classes.
   if (target.matches('.edit-btn')) {
     // Chama a função que executa a ação do respectivo botão.
-    enableToEditUser(target);
+    editUser(target);
   }
   if (target.matches('.delete-btn')) {
     deleteUser(target);
@@ -173,7 +173,7 @@ tableTBody.addEventListener('click', (event) => {
     saveEdit(target);
   }
   if (target.matches('.back-btn')) {
-    backRow(target);
+    cancelEdit(target);
   }
 });
 
