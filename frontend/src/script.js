@@ -1,5 +1,5 @@
-import { isEmail } from 'validator';
 import api from './api.js';
+import * as validation from './validation.js';
 import * as ui from './ui.js';
 
 // Seleciona os principais elementos do DOM com os quais vamos interagir.
@@ -12,35 +12,6 @@ const userAgeInput = document.querySelector('#user-age');
 // Objeto para armazenar o estado original de uma linha que está sendo editada.
 // A chave é o ID do usuário (vindo da API) e o valor é o seu HTML original.
 let HTMLEditedRows = {};
-
-// TODO - transferir essas checagens para o módulo validation.js
-/**
- * Valida se o formato do email é válido usando a biblioteca validator.
- * @param {string} email O email a ser validado.
- * @returns {boolean} Retorna true se o email for inválido.
- */
-function checkInvalidEmail(email) {
-  if (!isEmail(email)) {
-    alert('Por favor, digite um e-mail válido.');
-    return true;
-  }
-  return false;
-}
-
-/**
- * Verifica se algum dos campos do formulário está vazio.
- * @param {string} name O nome do usuário.
- * @param {string} email O email do usuário.
- * @param {string} age A idade do usuário.
- * @returns {boolean} Retorna true se algum campo estiver vazio.
- */
-function checkEmptyInputs(name, email, age) {
-  if (!name || !email || !age) {
-    alert('Por favor, preencha todos os campos.');
-    return true;
-  }
-  return false;
-}
 
 /**
  * Salva as alterações feitas em uma linha da tabela.
@@ -58,10 +29,7 @@ async function saveEdit(button) {
   const age = parseInt(inputs[2].value.trim(), 10);
 
   // Valida os novos dados.
-  const inputsAreInvalid =
-    checkEmptyInputs(name, email, age) || checkInvalidEmail(email);
-
-  if (inputsAreInvalid) {
+  if (!validation.areInputsValid(name, email, age)) {
     return; // Interrompe a função se os dados forem inválidos.
   }
 
@@ -155,21 +123,18 @@ function enableToEditUser(button) {
 
 /**
  * Lida com o envio do formulário, agora enviando os dados para a API via POST.
- * @param {Event} e O evento de submit do formulário.
+ * @param {Event} event O evento de submit do formulário.
  */
-async function submitForm(e) {
-  e.preventDefault();
+async function submitForm(event) {
+  event.preventDefault();
 
   // Coleta e formata os dados do formulário.
   const name = userNameInput.value.trim();
   const email = userEmailInput.value.trim();
   const age = parseInt(userAgeInput.value.trim(), 10);
 
-  const inputsAreInvalid =
-    checkEmptyInputs(name, email, age) || checkInvalidEmail(email);
-
-  if (inputsAreInvalid) {
-    return;
+  if (!validation.areInputsValid(name, email, age)) {
+    return; // Interrompe a função se os dados forem inválidos.
   }
 
   const newUser = { name, email, age };
