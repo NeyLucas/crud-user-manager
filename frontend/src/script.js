@@ -1,8 +1,6 @@
 import { isEmail } from 'validator';
 import api from './api.js';
-
-// TODO - remover essa linha após implementar o código no módulo ui.js
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import * as ui from './ui.js';
 
 // Seleciona os principais elementos do DOM com os quais vamos interagir.
 const userForm = document.querySelector('#user-form');
@@ -14,62 +12,6 @@ const userAgeInput = document.querySelector('#user-age');
 // Objeto para armazenar o estado original de uma linha que está sendo editada.
 // A chave é o ID do usuário (vindo da API) e o valor é o seu HTML original.
 let HTMLEditedRows = {};
-
-/**
- * Constrói o HTML padrão para as células (td) de uma linha da tabela.
- * @param {string} name Nome do usuário.
- * @param {string} email Email do usuário.
- * @param {string} age Idade do usuário.
- * @returns {string} O HTML interno de uma linha (tr).
- */
-function buildRowContentHTML(name, email, age) {
-  return `
-        <td class='name-td'>${name}</td>
-        <td class='email-td'>${email}</td>
-        <td class='age-td'>${age}</td>
-        <td class='action-td'>
-            <button class='action-btn edit-btn'>Editar</button>
-            <button class='action-btn delete-btn'>Excluir</button>
-        </td>
-    `;
-}
-
-/**
- * Função assíncrona para buscar os usuários da API e renderizá-los na tabela.
- * Esta função será chamada quando a página carregar para popular a tabela inicialmente.
- */
-async function renderUsers() {
-  try {
-    // Faz uma requisição GET para a API e aguarda a resposta.
-    const response = await fetch(API_BASE_URL);
-
-    // Verifica caso a API não mande dados (o banco possivelmente está vazio).
-    if (response.statusText === 'No Content') {
-      tableTBody.innerHTML = '';
-      return;
-    }
-
-    // Se a resposta foi bem-sucedida, converte o corpo da resposta para JSON.
-    const users = await response.json();
-
-    // Limpa o corpo da tabela para evitar duplicar dados ao renderizar novamente.
-    tableTBody.innerHTML = '';
-
-    users.forEach((user) => {
-      const newRow = document.createElement('tr');
-      // Define um 'data-attribute' na linha com o ID do usuário.
-      // Isso é crucial para as operações de update e delete.
-      newRow.dataset.user = user.id;
-      // Constrói o HTML interno da linha com os dados do usuário.
-      newRow.innerHTML = buildRowContentHTML(user.name, user.email, user.age);
-      // Adiciona a nova linha ao corpo da tabela.
-      tableTBody.appendChild(newRow);
-    });
-  } catch (err) {
-    alert(err.message);
-    console.error(err);
-  }
-}
 
 // TODO - transferir essas checagens para o módulo validation.js
 /**
@@ -132,7 +74,7 @@ async function saveEdit(button) {
 
     // Recarrega os dados da tabela a partir da API para garantir que a UI
     // esteja perfeitamente sincronizada com o banco de dados.
-    renderUsers();
+    ui.renderUsers(tableTBody);
 
     // Limpa o backup da linha, pois a edição foi concluída.
     delete HTMLEditedRows[userId];
@@ -172,7 +114,7 @@ async function deleteUser(button) {
   if (confirm('Tem certeza que deseja excluir este usuário ?')) {
     try {
       await api.deleteUser(userId);
-      renderUsers();
+      ui.renderUsers(tableTBody);
       alert(`Usuário com ID: ${userId} removido com sucesso!`);
     } catch (err) {
       alert(err.message);
@@ -215,7 +157,7 @@ function enableToEditUser(button) {
  * Lida com o envio do formulário, agora enviando os dados para a API via POST.
  * @param {Event} e O evento de submit do formulário.
  */
-async function handleUserSubmit(e) {
+async function submitForm(e) {
   e.preventDefault();
 
   // Coleta e formata os dados do formulário.
@@ -235,7 +177,7 @@ async function handleUserSubmit(e) {
   try {
     // Extrai o retorno da API para usar na mensagem de sucesso.
     const user = await api.createUser(newUser);
-    renderUsers();
+    ui.renderUsers(tableTBody);
 
     // Limpa o formulário após o sucesso e alerta o usuário.
     userForm.reset();
@@ -271,5 +213,13 @@ tableTBody.addEventListener('click', (event) => {
 });
 
 // Adiciona um ouvinte de eventos quando a página é carregada ou o formulário é enviado.
-document.addEventListener('DOMContentLoaded', renderUsers);
-userForm.addEventListener('submit', handleUserSubmit);
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await ui.renderUsers(tableTBody);
+  } catch (err) {
+    alert(err.message);
+    console.error(err);
+  }
+});
+
+userForm.addEventListener('submit', submitForm);
