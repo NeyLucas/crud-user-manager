@@ -6,30 +6,24 @@ import * as ui from './ui.js';
 // A chave é o ID do usuário (vindo da API) e o valor é o seu HTML original.
 let HTMLEditedRows = {};
 
-function formatEditedInputs(button) {
-  // Encontra a linha (tr) que está sendo editada.
-  const editedRow = button.closest('tr');
-  const userId = editedRow.dataset.user; // Pega o ID do banco.
-
-  // Coleta e formata os novos valores dos inputs dentro da linha.
-  const inputs = editedRow.querySelectorAll('.form-input-edit');
-  const name = inputs[0].value.trim();
-  const email = inputs[1].value.trim();
-  const age = parseInt(inputs[2].value.trim(), 10);
-
-  // Prepara o objeto para ser enviado no corpo da requisição.
-  const updatedUser = { name, email, age };
-
-  return { updatedUser, userId };
-}
-
 export default {
   /**
    * Salva as alterações feitas em uma linha da tabela.
    * @param {HTMLButtonElement} button O botão "Salvar" que foi clicado.
    */
   async saveEdit(button) {
-    const { updatedUser, userId } = formatEditedInputs(button);
+    // Encontra a linha (tr) que está sendo editada.
+    const editedRow = button.closest('tr');
+    const userId = editedRow.dataset.user; // Pega o ID do banco.
+
+    // Coleta e formata os novos valores dos inputs dentro da linha.
+    const inputs = editedRow.querySelectorAll('.form-input-edit');
+    const name = inputs[0].value.trim();
+    const email = inputs[1].value.trim();
+    const age = parseInt(inputs[2].value.trim(), 10);
+
+    // Prepara o objeto para ser enviado no corpo da requisição.
+    const updatedUser = { name, email, age };
 
     // Valida os novos dados.
     if (!validation.areInputsValid(updatedUser)) {
@@ -41,7 +35,7 @@ export default {
       await api.updateUser(updatedUser, userId);
 
       // Atualiza a UI construindo o HTML com os novos valores.
-      ui.buildRowContentHTML(updatedUser);
+      editedRow.appendChild(ui.buildRowContentHTML(updatedUser));
 
       // Limpa o backup da linha, pois a edição foi concluída.
       delete HTMLEditedRows[userId];
@@ -124,14 +118,18 @@ export default {
    * @param {Object} newUser objeto contendo as informações do usuário a ser adicionado.
    * @returns {boolean} retorna true se foi o usuário foi criado com sucesso.
    */
-  async createUser(newUser) {
+  async createUser(newUser, tableTBody) {
     if (!validation.areInputsValid(newUser)) {
       return;
     }
     try {
       // Extrai o retorno da API para usar na mensagem de sucesso.
       const user = await api.createUser(newUser);
-      ui.buildRowContentHTML(newUser);
+
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = ui.buildRowContentHTML(newUser);
+      tableTBody.appendChild(newRow);
+
       alert(`Usuário com ID: ${user.userId} adicionado com sucesso!`);
       return true;
     } catch (err) {

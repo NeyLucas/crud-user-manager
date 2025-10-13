@@ -23,7 +23,7 @@ async function submitForm(event) {
   // Prepara o objeto para ser enviado no corpo da requisição.
   const newUser = { name, email, age };
 
-  const isUserCreated = await buttonActions.createUser(newUser);
+  const isUserCreated = await buttonActions.createUser(newUser, tableTBody);
 
   if (isUserCreated) {
     // Limpa o formulário após o sucesso e alerta o usuário.
