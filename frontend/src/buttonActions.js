@@ -97,20 +97,14 @@ export default {
 
     // Pega os valores atuais das células.
     const tableData = rowToEdit.querySelectorAll('td');
-    const oldNameValue = tableData[0].textContent;
-    const oldEmailValue = tableData[1].textContent;
-    const oldAgeValue = tableData[2].textContent;
+    const name = tableData[0].textContent;
+    const email = tableData[1].textContent;
+    const age = tableData[2].textContent;
+
+    const userToUpdate = { name, email, age };
 
     // Substitui o conteúdo da linha por inputs preenchidos com os valores antigos.
-    rowToEdit.innerHTML = `
-          <td class='name-td'><input type='text' placeholder='Nome' class='form-input-edit name-ipt-edit' value='${oldNameValue}'></td>
-          <td class='email-td'><input type='email' placeholder='Email' class='form-input-edit email-ipt-edit' value='${oldEmailValue}'></td>
-          <td class='age-td'><input type='number' min='1' max='150' placeholder='Idade' class='form-input-edit age-ipt-edit' value='${oldAgeValue}'></td>
-          <td class='action-td'>
-              <button class='action-btn save-btn'>Salvar</button>
-              <button class='action-btn back-btn'>Voltar</button>
-          </td>
-      `;
+    rowToEdit.innerHTML = ui.buildRowContentHTML(userToUpdate, true);
   },
 
   /**
