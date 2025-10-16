@@ -2,21 +2,38 @@ import api from './api.js';
 
 /**
  * Constrói o HTML padrão para as células (td) de uma linha da tabela.
+ *
+ * A função renderiza a linha em modo de visualização (default) ou em modo de edição (com campos de input).
+ * Essa abordagem é eficiente e prática para manipular o DOM diretamente no front-end.
+ *
  * @param {Object} user - Objeto contendo os dados do usuário para a linha.
- * @param {string} user.name Nome do usuário.
- * @param {string} user.email Email do usuário.
- * @param {string} user.age Idade do usuário.
- * @returns {string} O HTML interno de uma linha (tr).
+ * @param {string} user.name - Nome do usuário.
+ * @param {string} user.email - Email do usuário.
+ * @param {string} user.age - Idade do usuário.
+ * @param {boolean} [isEditing=false] - Flag opcional para determinar se a linha deve ser renderizada em modo de edição (com inputs e botões Salvar/Voltar).
+ * @returns {string} O HTML interno de uma linha (tr) pronto para ser injetado no DOM.
  */
-export function buildRowContentHTML({ name, email, age }) {
+export function buildRowContentHTML({ name, email, age }, isEditing = false) {
+  if (isEditing) {
+    return `
+          <td class='name-td'><input type='text' placeholder='Nome' class='form-input-edit name-ipt-edit' value='${name}'></td>
+          <td class='email-td'><input type='email' placeholder='Email' class='form-input-edit email-ipt-edit' value='${email}'></td>
+          <td class='age-td'><input type='number' min='1' max='150' placeholder='Idade' class='form-input-edit age-ipt-edit' value='${age}'></td>
+          <td class='action-td'>
+              <button class='action-btn save-btn'>Salvar</button>
+              <button class='action-btn back-btn'>Voltar</button>
+          </td>
+      `;
+  }
+
   return `
-        <td class='name-td'>${name}</td>
-        <td class='email-td'>${email}</td>
-        <td class='age-td'>${age}</td>
-        <td class='action-td'>
-            <button class='action-btn edit-btn'>Editar</button>
-            <button class='action-btn delete-btn'>Excluir</button>
-        </td>
+      <td class='name-td'>${name}</td>
+      <td class='email-td'>${email}</td>
+      <td class='age-td'>${age}</td>
+      <td class='action-td'>
+          <button class='action-btn edit-btn'>Editar</button>
+          <button class='action-btn delete-btn'>Excluir</button>
+      </td>
     `;
 }
 
