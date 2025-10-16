@@ -1,5 +1,7 @@
 import api from './api.js';
 
+function toogleEmptyState() {}
+
 /**
  * Constrói o HTML padrão para as células (td) de uma linha da tabela.
  *
@@ -45,6 +47,10 @@ export async function renderUsers(tableTBody) {
   // Recebe todos os usuários vindos da API.
   const users = await api.getAllUsers();
 
+  if (!users) {
+    toogleEmptyState();
+    return;
+  }
   // Limpa o corpo da tabela para evitar duplicar dados ao renderizar novamente.
   tableTBody.innerHTML = '';
 
