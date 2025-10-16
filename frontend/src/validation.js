@@ -28,6 +28,16 @@ function areInputsFilled(name, email, age) {
   return true;
 }
 
+/**
+ * Verifica a validade dos dados de entrada (nome, email, idade) antes de processá-los.
+ * É uma verificação de duas etapas:
+ * 1. Todos os campos estão preenchidos, e 2. O formato do email é válido.
+ * @param {object} user - Objeto contendo os dados de entrada do formulário.
+ * @param {string} user.name - O nome a ser validado.
+ * @param {string} user.email - O email a ser validado.
+ * @param {string} user.age - A idade a ser validada.
+ * @returns {boolean} Retorna true se todos os campos estiverem preenchidos E o email for válido; caso contrário, false.
+ */
 export function areInputsValid({ name, email, age }) {
   return areInputsFilled(name, email, age) && isEmailValid(email);
 }
