@@ -126,7 +126,12 @@ export default {
       // Extrai o retorno da API para usar na mensagem de sucesso.
       const user = await api.createUser(newUser);
 
+      // Cria uma nova linha caso o usuário tenha sido criado;
       const newRow = document.createElement('tr');
+      // Salva seu ID no dataset.
+      newRow.dataset.user = user.userId;
+
+      // Preenche a nova linha com o conteúdo HTML do novo usuário e adiciona à tabela.
       newRow.innerHTML = ui.buildRowContentHTML(newUser);
       tableTBody.appendChild(newRow);
 
