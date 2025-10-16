@@ -35,7 +35,7 @@ export default {
       await api.updateUser(updatedUser, userId);
 
       // Atualiza a UI construindo o HTML com os novos valores.
-      editedRow.appendChild(ui.buildRowContentHTML(updatedUser));
+      editedRow.innerHTML = ui.buildRowContentHTML(updatedUser);
 
       // Limpa o backup da linha, pois a edição foi concluída.
       delete HTMLEditedRows[userId];

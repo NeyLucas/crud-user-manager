@@ -2,6 +2,7 @@ import api from './api.js';
 
 /**
  * Constrói o HTML padrão para as células (td) de uma linha da tabela.
+ * @param {Object} user - Objeto contendo os dados do usuário para a linha.
  * @param {string} name Nome do usuário.
  * @param {string} email Email do usuário.
  * @param {string} age Idade do usuário.
