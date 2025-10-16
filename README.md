@@ -48,7 +48,7 @@ Esta seção detalha os próximos passos para a finalização da versão atual e
 ### 🎯 v1.0 - Tarefas Restantes
 
 - [x] Criar README.
-- [ ] Modularizar o código JavaScript do frontend.
+- [x] Modularizar o código JavaScript do frontend.
 - [ ] Adicionar texto indicativo quando a tabela de usuários estiver vazia.
 - [ ] Adicionar uma sidebar de navegação.
 - [ ] Criar uma imagem Docker para a aplicação.
