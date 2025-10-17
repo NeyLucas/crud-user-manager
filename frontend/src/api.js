@@ -75,5 +75,6 @@ export default {
     });
 
     await checkResponse(response);
+    return await response.json();
   },
 };

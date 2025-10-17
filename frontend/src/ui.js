@@ -1,6 +1,6 @@
 import api from './api.js';
 
-function toogleEmptyState(isEmpty = true) {
+export function showEmptyTableMessage(isEmpty = true) {
   const table = document.querySelector('#user-table');
   const emptyParagraph = document.querySelector('#empty-paragraph');
 
@@ -60,7 +60,7 @@ export async function renderUsers(tableTBody) {
   const users = await api.getAllUsers();
 
   if (users.length === 0) {
-    toogleEmptyState();
+    showEmptyTableMessage();
     return;
   }
   // Limpa o corpo da tabela para evitar duplicar dados ao renderizar novamente.
