@@ -12,6 +12,7 @@
   --color-border: rgb(221, 221, 221);
   --color-row-hover: rgb(231, 231, 231);
   --color-dark-rgb: 0, 0, 0;
+  --color-gray-rgb: 58, 57, 57;
 
   /* Cores de Ação (Botões). */
   --color-action-edit: rgb(210, 105, 30);
@@ -243,16 +244,18 @@ tbody tr:hover {
 }
 
 /* Estilização de parágrafos (servirá para a mensagem tabela vazia) */
-p {
+#empty-paragraph p {
   font-size: 3rem;
   font-weight: 500;
   color: rgba(var(--color-dark-rgb), 0.3);
 }
+
 #hamburguer-menu {
   top: 3.5%;
   left: 1%;
   position: absolute;
   cursor: pointer;
+  z-index: 2;
 }
 
 .hamburguer-button {
@@ -260,4 +263,34 @@ p {
   width: 25px;
   height: 2px;
   margin: 3px;
+}
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 350px;
+  height: 100%;
+  background-color: var(--color-border);
+  box-shadow: 10px 0px 10px rgba(var(--color-dark-rgb), 0.2);
+}
+
+.project-infos {
+  width: 85%;
+  text-align: center;
+}
+
+.project-infos p {
+  text-align: justify;
+}
+
+.line {
+  height: 3px;
+  width: 70%;
+  background-color: rgba(var(--color-gray-rgb), 0.3);
+  border-radius: 40%;
 }
