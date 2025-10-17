@@ -4,22 +4,20 @@
  */
 :root {
   /* Cores Primárias. */
-  --color-dark: #000000;
-  --color-gray: #3a3939;
-  --color-light: #ffffff;
+  --color-dark: rgb(0, 0, 0);
+  --color-gray: rgb(58, 57, 57);
+  --color-light: rgb(255, 255, 255);
 
   /* Cores Úteis. */
-  --color-border: #dddddd;
-  --color-row-hover: #e7e7e7;
+  --color-border: rgb(221, 221, 221);
+  --color-row-hover: rgb(231, 231, 231);
+  --color-dark-rgb: 0, 0, 0;
 
   /* Cores de Ação (Botões). */
-  --color-action-edit: #d2691e;
-  --color-action-delete: #a52a2a;
-  --color-action-save: #228b22;
-  --color-action-back: #727171;
-
-  /* Usado em sombras. */
-  --color-dark-rgb: 0, 0, 0;
+  --color-action-edit: rgb(210, 105, 30);
+  --color-action-delete: rgb(165, 42, 42);
+  --color-action-save: rgb(34, 139, 34);
+  --color-action-back: rgb(114, 113, 113);
 }
 
 /* Reset básico universal: Aplica box-sizing para facilitar o layout e define a fonte padrão. */
@@ -239,6 +237,14 @@ tbody tr:hover {
   background-color: var(--color-row-hover);
 }
 
+/* Valor padrão que será alterado dinâmicamente */
 #empty-paragraph {
   display: none;
+}
+
+/* Estilização de parágrafos (servirá para a mensagem tabela vazia) */
+p {
+  font-size: 3rem;
+  font-weight: 500;
+  color: rgba(var(--color-dark-rgb), 0.3);
 }
