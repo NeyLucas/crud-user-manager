@@ -1,15 +1,17 @@
 import api from './api.js';
 
 function toogleEmptyState(isEmpty = true) {
-  const tableContainer = document.querySelector('.table-container');
   const table = document.querySelector('#user-table');
+  const emptyParagraph = document.querySelector('#empty-paragraph');
 
-  const emptyTextDiv = document.createElement('div');
+  if (!isEmpty) {
+    table.style.display = 'block';
+    emptyParagraph.style.display = 'none';
+    return;
+  }
 
-  table.setAttribute('hidden', 'true');
-  emptyTextDiv.innerHTML =
-    '<p id="empty-paragraph">Insira Usuários Na tabela</p>';
-  tableContainer.appendChild(emptyTextDiv);
+  table.style.display = 'none';
+  emptyParagraph.style.display = 'block';
 }
 
 /**
