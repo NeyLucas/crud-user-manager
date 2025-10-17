@@ -1,10 +1,18 @@
 import api from './api.js';
 
-export function showEmptyTableMessage(isEmpty = true) {
+/**
+ * Função que irá exibir a mensagem caso a tabela esteja vazia.
+ *
+ * @param {boolean} [showMessage = true] flag opcional que irá determinar se a mensagem
+ * será exibida.
+ */
+export function showEmptyTableMessage(showMessage = true) {
+  // Captura elementos que serão utilizados.
   const table = document.querySelector('#user-table');
   const emptyParagraph = document.querySelector('#empty-paragraph');
 
-  if (!isEmpty) {
+  // Define a exibição/não exibição através da propriedade display do CSS.
+  if (!showMessage) {
     table.style.display = 'block';
     emptyParagraph.style.display = 'none';
     return;
@@ -54,6 +62,9 @@ export function buildRowContentHTML({ name, email, age }, isEditing = false) {
 /**
  * Função que recebe e renderiza usuários vindos da API.
  * Esta função será chamada quando a página carregar para popular a tabela inicialmente.
+ *
+ * @param {HTMLTableSectionElement} tableTBody corpo da tabela onde serão renderizados
+ * os usuários.
  */
 export async function renderUsers(tableTBody) {
   // Recebe todos os usuários vindos da API.

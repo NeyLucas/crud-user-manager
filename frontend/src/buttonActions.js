@@ -76,6 +76,8 @@ export default {
         const success = await api.deleteUser(userId);
         rowToDelete.remove(); // Remove a linha selecionada.
 
+        // Verifica se não existem mais usuários a serem visualizados e então
+        // exibe a mensagem de tabela vazia
         if (success.totalRemaining === 0) {
           ui.showEmptyTableMessage();
         }
@@ -134,6 +136,7 @@ export default {
       newRow.innerHTML = ui.buildRowContentHTML(newUser);
       tableTBody.appendChild(newRow);
 
+      // Não exibe a mensagem de tabela vazia.
       ui.showEmptyTableMessage(false);
 
       alert(`Usuário com ID: ${user.userId} adicionado com sucesso!`);
