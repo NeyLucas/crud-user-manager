@@ -248,3 +248,16 @@ p {
   font-weight: 500;
   color: rgba(var(--color-dark-rgb), 0.3);
 }
+#hamburguer-menu {
+  top: 3.5%;
+  left: 1%;
+  position: absolute;
+  cursor: pointer;
+}
+
+.hamburguer-button {
+  background-color: black;
+  width: 25px;
+  height: 2px;
+  margin: 3px;
+}
