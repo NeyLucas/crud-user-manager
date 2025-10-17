@@ -73,8 +73,15 @@ export default {
     // Confirmação de exclusão para evitar erros por parte do usuário.
     if (confirm('Tem certeza que deseja excluir este usuário ?')) {
       try {
-        await api.deleteUser(userId);
+        const success = await api.deleteUser(userId);
         rowToDelete.remove(); // Remove a linha selecionada.
+
+        // Verifica se não existem mais usuários a serem visualizados e então
+        // exibe a mensagem de tabela vazia
+        if (success.totalRemaining === 0) {
+          ui.showEmptyTableMessage();
+        }
+
         alert(`Usuário com ID: ${userId} removido com sucesso!`);
       } catch (err) {
         alert(err.message);
@@ -128,6 +135,9 @@ export default {
       // Preenche a nova linha com o conteúdo HTML do novo usuário e adiciona à tabela.
       newRow.innerHTML = ui.buildRowContentHTML(newUser);
       tableTBody.appendChild(newRow);
+
+      // Não exibe a mensagem de tabela vazia.
+      ui.showEmptyTableMessage(false);
 
       alert(`Usuário com ID: ${user.userId} adicionado com sucesso!`);
       return true;

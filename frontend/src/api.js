@@ -68,6 +68,7 @@ export default {
    * Função assíncrona para remover um usuário através do método DELETE
    * com o endpoint específico do usuário.
    * @param {string} userId id do usuário no banco que foi salvo no dataset.user.
+   * @returns {object} Retorna um objeto com dados da API.
    */
   async deleteUser(userId) {
     const response = await fetch(`${API_BASE_URL}/${userId}`, {
@@ -75,5 +76,6 @@ export default {
     });
 
     await checkResponse(response);
+    return await response.json();
   },
 };
