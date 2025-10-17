@@ -1,6 +1,16 @@
 import api from './api.js';
 
-function toogleEmptyState() {}
+function toogleEmptyState(isEmpty = true) {
+  const tableContainer = document.querySelector('.table-container');
+  const table = document.querySelector('#user-table');
+
+  const emptyTextDiv = document.createElement('div');
+
+  table.setAttribute('hidden', 'true');
+  emptyTextDiv.innerHTML =
+    '<p id="empty-paragraph">Insira Usuários Na tabela</p>';
+  tableContainer.appendChild(emptyTextDiv);
+}
 
 /**
  * Constrói o HTML padrão para as células (td) de uma linha da tabela.
@@ -47,7 +57,7 @@ export async function renderUsers(tableTBody) {
   // Recebe todos os usuários vindos da API.
   const users = await api.getAllUsers();
 
-  if (!users) {
+  if (users.length === 0) {
     toogleEmptyState();
     return;
   }
