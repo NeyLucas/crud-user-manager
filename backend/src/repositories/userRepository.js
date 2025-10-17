@@ -109,12 +109,15 @@ export default {
     let connection;
     try {
       connection = await pool.getConnection();
+      await pool.execute('DELETE FROM users WHERE user_id = ?', [id]);
+
       const [result] = await pool.execute(
-        'DELETE FROM users WHERE user_id = ?',
-        [id],
+        'SELECT COUNT(*) AS total_remaining FROM users',
       );
 
-      return { success: true, affectedRows: result.affectedRows };
+      // Retorna o total de usuários ainda cadastrados e uma flag de sucesso.
+      const totalRemaining = result[0].total_remaining;
+      return { success: true, totalRemaining };
     } finally {
       if (connection) {
         connection.release();
