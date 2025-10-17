@@ -49,7 +49,7 @@ Esta seção detalha os próximos passos para a finalização da versão atual e
 
 - [x] Criar README.
 - [x] Modularizar o código JavaScript do frontend.
-- [ ] Adicionar texto indicativo quando a tabela de usuários estiver vazia.
+- [x] Adicionar texto indicativo quando a tabela de usuários estiver vazia.
 - [ ] Adicionar uma sidebar de navegação.
 - [ ] Criar uma imagem Docker para a aplicação.
 - [ ] Fazer o deploy do backend no Render.
