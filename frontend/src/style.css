@@ -238,3 +238,7 @@ th:nth-child(4), /* Ações */
 tbody tr:hover {
   background-color: var(--color-row-hover);
 }
+
+#empty-paragraph {
+  display: none;
+}
