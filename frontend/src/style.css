@@ -452,3 +452,7 @@ i:hover,
   margin: 20px;
   cursor: pointer;
 }
+
+footer {
+  color: rgba(var(--color-dark-rgb), 0.5);
+}
