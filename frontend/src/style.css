@@ -299,11 +299,16 @@ tbody tr:hover {
 }
 
 .used-tools {
-  margin-bottom: 20px;
+  margin-bottom: 23px;
   text-align: center;
 }
 
 i {
   font-size: 2.5rem;
   padding: 5px;
+}
+
+i:hover {
+  background-color: rgba(var(--color-gray-rgb), 0.2);
+  border-radius: 15px;
 }
