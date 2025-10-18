@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRUD simples - cadastro de usuários</title>
     <link rel="stylesheet" href="src/style.css" />
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
     <!-- Importa as fontes Montserrat e Roboto Condensed do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,7 +29,7 @@
       <div class="hamburguer-button"></div>
     </span>
 
-    <nav id="sidebar">
+    <aside id="sidebar">
       <div class="project-infos">
         <div class="about-project"></div>
         <h3>O Projeto</h3>
@@ -37,16 +41,35 @@
         </p>
         <div class="line"></div>
         <div class="used-tools">
-          <div class="language backend"></div>
-          <div class="language frontend"></div>
-          <div class="tools"></div>
+          <h3>Backend</h3>
+          <div class="language backend">
+            <i class="devicon-nodejs-plain colored"></i>
+            <i class="devicon-express-original colored"></i>
+            <i class="devicon-mysql-plain colored"></i>
+            <i class="devicon-docker-plain colored"></i>
+          </div>
+          <h3>Frontend</h3>
+          <div class="language frontend">
+            <i class="devicon-html5-plain colored"></i>
+            <i class="devicon-css3-plain colored"></i>
+            <i class="devicon-javascript-plain colored"></i>
+            <i class="devicon-vite-plain colored"></i>
+          </div>
+          <h3>DevTools</h3>
+          <div class="tools">
+            <i class="devicon-git-plain colored"></i>
+            <i class="devicon-github-original colored"></i>
+            <i class="devicon-npm-plain colored"></i>
+            <i class="devicon-eslint-plain colored"></i>
+            <i class="devicon-nodemon-plain colored"></i>
+          </div>
         </div>
         <div class="line"></div>
         <div class="about-me">
           <div class="contact"></div>
         </div>
       </div>
-    </nav>
+    </aside>
 
     <!-- Formulário para adicionar ou editar usuários. -->
     <form id="user-form">
