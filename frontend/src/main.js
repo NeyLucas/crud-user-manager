@@ -7,6 +7,8 @@ const tableTBody = document.querySelector('#user-table tbody');
 const userNameInput = document.querySelector('#user-name');
 const userEmailInput = document.querySelector('#user-email');
 const userAgeInput = document.querySelector('#user-age');
+const hamburguerMenu = document.querySelector('#hamburguer-menu');
+const sidebar = document.querySelector('#sidebar');
 
 /**
  * Lida com o envio do formulário.
@@ -65,3 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 userForm.addEventListener('submit', submitForm);
+hamburguerMenu.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  hamburguerMenu.classList.toggle('active');
+});

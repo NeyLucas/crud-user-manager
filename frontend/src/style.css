@@ -251,11 +251,15 @@ tbody tr:hover {
 }
 
 #hamburguer-menu {
+  background-color: rgba(var(--color-dark-rgb), 0.1);
   top: 3.5%;
   left: 1%;
+  padding: 15px;
+  border-radius: 20%;
   position: fixed;
   cursor: pointer;
   z-index: 2;
+  transition: transform 0.3s ease;
 }
 
 .hamburguer-button {
@@ -263,6 +267,23 @@ tbody tr:hover {
   width: 25px;
   height: 2px;
   margin: 3px;
+  transition: transform 0.3s ease;
+}
+
+#hamburguer-menu.active {
+  transform: translateX(145px);
+}
+
+#hamburguer-menu.active .hamburguer-button:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+#hamburguer-menu.active .hamburguer-button:nth-child(2) {
+  transform: rotate(-45deg);
+}
+
+#hamburguer-menu.active .hamburguer-button:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
 }
 
 #sidebar {
@@ -276,6 +297,12 @@ tbody tr:hover {
   width: 380px;
   height: 100%;
   background-color: var(--color-border);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+#sidebar.open {
+  transform: translateX(0);
   box-shadow: 10px 0px 10px rgba(var(--color-dark-rgb), 0.2);
 }
 
@@ -284,13 +311,13 @@ h3 {
 }
 
 .project-infos {
-  margin-top: 50px;
+  margin-top: 120px;
   width: 90%;
   display: grid;
   align-items: center;
   justify-items: center;
   overflow: auto;
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .about-project h3 {
