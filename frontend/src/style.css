@@ -281,7 +281,10 @@ tbody tr:hover {
 
 .project-infos {
   width: 85%;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-infos p {
@@ -292,5 +295,15 @@ tbody tr:hover {
   height: 3px;
   width: 70%;
   background-color: rgba(var(--color-gray-rgb), 0.3);
-  border-radius: 40%;
+  border-radius: 20%;
+}
+
+.used-tools {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+i {
+  font-size: 2.5rem;
+  padding: 5px;
 }
