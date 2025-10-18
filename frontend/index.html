@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CRUD simples - cadastro de usuários</title>
     <link rel="stylesheet" href="src/style.css" />
-
+    <!-- Importa icones de linguagens e ferramentas do Devicon -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
     <!-- Importa as fontes Montserrat e Roboto Condensed do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,6 +23,113 @@
     <header class="title-container">
       <h1><b>Cadastro de Usuários - CRUD simples</b></h1>
     </header>
+
+    <!-- Botão estilo "hamburguer" responsável por abrir e fechar a sidebar -->
+    <span id="hamburguer-menu">
+      <!-- Cada div representa uma linha do ícone de menu -->
+      <div class="hamburguer-button"></div>
+      <div class="hamburguer-button"></div>
+      <div class="hamburguer-button"></div>
+    </span>
+
+    <!-- Sidebar com informações sobre o projeto e o desenvolvedor -->
+    <aside id="sidebar">
+      <div class="project-infos">
+        <!-- Seção que descreve o objetivo do projeto -->
+        <div class="about-project">
+          <h3>O Projeto</h3>
+          <p>
+            O projeto consiste em um CRUD completo para gerenciamento de
+            usuários. Implementação de uma API RESTful e uma interface reativa
+            em Vanilla JS (Vite), demonstrando as operações essenciais de
+            criação, leitura, atualização e exclusão de dados.
+          </p>
+          <p>
+            Repositóro:
+            <a
+              href="https://github.com/NeyLucas/crud-user-manager"
+              target="_blank"
+            >
+              crud-user-manager
+            </a>
+          </p>
+        </div>
+
+        <!-- Linha divisória entre as seções -->
+        <div class="line"></div>
+
+        <!-- Seção que mostra as linguagens e ferramentas utilizadas -->
+        <div class="used-tools">
+          <h3>Linguagens/Ferramentas Utilizadas:</h3>
+
+          <!-- Tecnologias do backend -->
+          <h4>Backend</h4>
+          <div class="language backend">
+            <i class="devicon-nodejs-plain colored" title="Node.js"></i>
+            <i class="devicon-express-original colored" title="Express.js"></i>
+            <i class="devicon-mysql-plain colored" title="MySQL"></i>
+            <i class="devicon-docker-plain colored" title="Docker"></i>
+          </div>
+
+          <!-- Tecnologias do frontend -->
+          <h4>Frontend</h4>
+          <div class="language frontend">
+            <i class="devicon-html5-plain colored" title="HTML"></i>
+            <i class="devicon-css3-plain colored" title="CSS"></i>
+            <i class="devicon-javascript-plain" title="Javascript"></i>
+            <i class="devicon-vite-plain colored" title="Vite"></i>
+          </div>
+
+          <!-- Ferramentas auxiliares de desenvolvimento -->
+          <h4>DevTools</h4>
+          <div class="tools">
+            <i class="devicon-git-plain colored" title="Git"></i>
+            <i class="devicon-npm-plain colored" title="NPM"></i>
+            <i class="devicon-eslint-plain colored" title="Eslint"></i>
+            <i class="devicon-nodemon-plain" title="Nodemon"></i>
+          </div>
+        </div>
+
+        <!-- Linha divisória entre as seções -->
+        <div class="line"></div>
+
+        <!-- Seção sobre o desenvolvedor -->
+        <div class="about-me">
+          <h3>Sobre Mim</h3>
+
+          <!-- Link para o perfil do GitHub -->
+          <a href="https://github.com/NeyLucas" target="_blank">
+            <div class="profile">
+              <!-- Foto de perfil -->
+              <img
+                src="./src/assets/minha-foto.jpeg"
+                alt="Foto Lucas"
+                class="profile-pic"
+              />
+              <!-- Informações do perfil -->
+              <div class="profile-infos">
+                <p>@NeyLucas</p>
+                <p>Full-Stack Developer</p>
+                <p>Apaixonado por computação e códigos.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Links de contato -->
+          <div class="contact">
+            <a
+              href="https://linkedin.com/in/ney-lucas-a72b89353/"
+              target="_blank"
+            >
+              <i class="devicon-linkedin-plain colored" title="LinkedIn"></i>
+            </a>
+            <a href="https://github.com/NeyLucas" target="_blank">
+              <i class="devicon-github-original colored" title="GitHub"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </aside>
 
     <!-- Formulário para adicionar ou editar usuários. -->
     <form id="user-form">
@@ -77,6 +189,10 @@
     <div id="empty-paragraph">
       <p>Insira Usuários Na Tabela</p>
     </div>
+
+    <footer>
+      <p>Criado por Ney Lucas</p>
+    </footer>
 
     <!-- Link para o script principal que manipula toda a lógica do CRUD -->
     <script type="module" src="src/main.js"></script>
