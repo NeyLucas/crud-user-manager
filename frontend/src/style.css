@@ -38,6 +38,10 @@ body {
   color: var(--color-dark);
 }
 
+h1 {
+  margin-top: 30px;
+}
+
 /*
  * Estilização do Formulário de Cadastro (#user-form)
  */
@@ -252,9 +256,9 @@ tbody tr:hover {
 
 #hamburguer-menu {
   background-color: rgba(var(--color-dark-rgb), 0.1);
-  top: 3.5%;
-  left: 1%;
-  padding: 15px;
+  top: 4%;
+  left: 2%;
+  padding: 10px;
   border-radius: 20%;
   position: fixed;
   cursor: pointer;
@@ -271,7 +275,7 @@ tbody tr:hover {
 }
 
 #hamburguer-menu.active {
-  transform: translateX(145px);
+  transform: translateX(130px);
 }
 
 #hamburguer-menu.active .hamburguer-button:nth-child(1) {
