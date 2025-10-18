@@ -56,7 +56,7 @@ tableTBody.addEventListener('click', (event) => {
   }
 });
 
-// Adiciona um ouvinte de eventos quando a página é carregada ou o formulário é enviado.
+// Adiciona um ouvinte de eventos quando a página é carregada.
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     await ui.renderUsers(tableTBody);
@@ -66,8 +66,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
+// Adiciona o evento de envio do formulário, chamando a função submitForm.
 userForm.addEventListener('submit', submitForm);
+
+// Adiciona o evento de clique no menu hambúrguer.
 hamburguerMenu.addEventListener('click', () => {
+  // Alterna a classe "open" na sidebar, abrindo ou fechando o menu lateral.
   sidebar.classList.toggle('open');
+
+  // Alterna a classe "active" no ícone do menu, mudando sua aparência ao clicar.
   hamburguerMenu.classList.toggle('active');
 });
