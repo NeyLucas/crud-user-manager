@@ -9,8 +9,8 @@ const sslConfig =
   process.env.USE_SSL === 'true'
     ? {
         ssl: {
-          // 'rejectUnauthorized: true' garante que a conexão só ocorra se o certificado for válido.
-          rejectUnauthorized: true,
+          // 'rejectUnauthorized: false' libera a conexão com diferentes certificados.
+          rejectUnauthorized: false,
         },
       }
     : {};
