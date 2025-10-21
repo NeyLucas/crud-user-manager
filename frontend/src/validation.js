@@ -1,12 +1,13 @@
-import { isEmail } from 'validator';
-
 /**
- * Valida se o formato do email é válido usando a biblioteca validator.
+ * Valida se o formato do email é válido usando regex.
  * @param {string} email O email a ser validado.
  * @returns {boolean} Retorna true se o email for inválido.
  */
 function isEmailValid(email) {
-  if (!isEmail(email)) {
+  // Regex padrão: verifica se há um @ e pelo menos um . após ele.
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const isEmailFormatValid = emailRegex.test(email);
+  if (!isEmailFormatValid) {
     alert('Por favor, digite um e-mail válido.');
     return false;
   }
