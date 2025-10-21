@@ -29,6 +29,18 @@ i:hover {
   border-radius: 15px;
 }
 
+/* Valor padrão que será alterado dinâmicamente */
+#empty-paragraph {
+  display: none;
+}
+
+/* Estilização de parágrafos (servirá para a mensagem tabela vazia) */
+#empty-paragraph p {
+  font-size: 3rem;
+  font-weight: 500;
+  color: rgba(var(--color-dark-rgb), 0.3);
+}
+
 /* Estilo do rodapé */
 footer {
   color: rgba(var(--color-dark-rgb), 0.5);
