@@ -1,0 +1,33 @@
+/*
+ * Estilização do Formulário de Cadastro (#user-form)
+ */
+#user-form {
+  /* Define o tamanho e centraliza o conteúdo interno. */
+  width: 400px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* Estilos visuais: borda, arredondamento e sombra. */
+  border-radius: 20px;
+  border: solid var(--color-dark) 1px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(var(--color-dark-rgb), 0.1);
+}
+
+.form-group {
+  /* Contêiner para o label e input, garantindo o espaçamento correto. */
+  width: 300px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+}
+
+.form-input {
+  /* Placeholder de estilização, garantindo que o input ocupe todo o espaço disponível. */
+  width: 100%;
+  height: 100%;
+}

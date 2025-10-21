@@ -1,0 +1,31 @@
+/*
+ * Sidebar (Menu lateral)
+ * Estilos para posicionamento fixo, transição suave de abertura/fechamento
+ * e configuração do Flexbox.
+ */
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 380px;
+  height: 100%;
+  background-color: var(--color-border);
+
+  /* Estado Inicial: Fora da tela */
+  transform: translateX(-100%);
+
+  /* Transição suave para a animação de abertura/fechamento (transform) */
+  transition: transform 0.3s ease;
+}
+
+/* Estado Aberto da Sidebar */
+#sidebar.open {
+  /* Traz a sidebar para a tela */
+  transform: translateX(0);
+  /* Sombra para destaque visual */
+  box-shadow: 10px 0px 10px rgba(var(--color-dark-rgb), 0.2);
+}
