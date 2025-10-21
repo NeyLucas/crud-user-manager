@@ -1,0 +1,33 @@
+/* Define tamanho de fonte comum para inputs e labels. */
+label,
+input {
+  font-size: 1.05rem;
+}
+
+label {
+  /* Estilização específica do texto do label. */
+  width: 100%;
+  margin-bottom: 3px;
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+input {
+  /* Define a altura padrão para todos os campos de input. */
+  height: 30px;
+  width: 100%;
+}
+
+/*
+ * Reset de Inputs Numéricos
+ * Remove as setas de incremento/decremento dos inputs do tipo 'number' para uma UI mais limpa.
+ */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Chrome, Safari, Opera */
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Padrão moderno */
+}
