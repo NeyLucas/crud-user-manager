@@ -1,0 +1,18 @@
+/* Importação da base, estilos globais e variáveis */
+@import url('./base/_reset.css');
+@import url('./base/_variables.css');
+@import url('./base/_global.css');
+
+/* Importação das labels, inputs e botões */
+@import url('./components/_input.css');
+@import url('./components/_buttons.css');
+
+/* Importação dos componentes de fomulário e tabela */
+@import url('./components/_form.css');
+@import url('./components/_table.css');
+
+/* Importação do toggle menu, sidebar e seu conteúdo */
+@import url('./components/_toggle-menu.css');
+@import url('./components/_sidebar.css');
+@import url('./components/_sidebar-content.css');
+@import url('./components/_profile.css');
