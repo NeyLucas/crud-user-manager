@@ -1,0 +1,22 @@
+/*
+ * Variáveis CSS 
+ * Centraliza e padroniza as cores de toda a aplicação para consistência visual.
+ */
+:root {
+  /* Cores Primárias. */
+  --color-dark: rgb(0, 0, 0);
+  --color-gray: rgb(58, 57, 57);
+  --color-light: rgb(255, 255, 255);
+
+  /* Cores Úteis. */
+  --color-border: rgb(221, 221, 221);
+  --color-row-hover: rgb(231, 231, 231);
+  --color-dark-rgb: 0, 0, 0;
+  --color-gray-rgb: 58, 57, 57;
+
+  /* Cores de Ação (Botões). */
+  --color-action-edit: rgb(210, 105, 30);
+  --color-action-delete: rgb(165, 42, 42);
+  --color-action-save: rgb(34, 139, 34);
+  --color-action-back: rgb(114, 113, 113);
+}

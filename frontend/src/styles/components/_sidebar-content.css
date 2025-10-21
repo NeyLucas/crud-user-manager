@@ -1,0 +1,58 @@
+/* 
+ * Infos presentes na sidebar 
+ */
+
+/* Ajuste para rolagem e layout interno */
+.project-infos {
+  margin-top: 120px;
+  width: 90%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  overflow: auto; /* Permite rolagem do conteúdo interno */
+  padding: 0 20px;
+}
+
+/* Alinhamento do Título da Seção "Sobre o Projeto" */
+.about-project h3 {
+  text-align: center;
+}
+
+/* Estilo do Parágrafo na Seção "Sobre o Projeto" */
+.about-project p {
+  font-size: 1rem;
+  text-align: justify;
+}
+
+/* Linha Separadora */
+.line {
+  height: 3px;
+  width: 70%;
+  background-color: rgba(var(--color-gray-rgb), 0.3);
+  border-radius: 20%;
+}
+
+/* Contêiner das Ferramentas Usadas */
+.used-tools {
+  margin-bottom: 23px;
+  text-align: center;
+}
+
+/* Seção Sobre Mim (About Me) */
+.about-me {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Remove estilos padrão de links (para que o perfil possa ser um link sem sublinhado) */
+.about-me a {
+  all: unset;
+}
+
+/* Seção de Contato/Redes Sociais */
+.contact {
+  margin: 20px;
+  cursor: pointer;
+}
