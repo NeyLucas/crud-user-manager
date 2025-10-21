@@ -1,0 +1,76 @@
+/*
+ * Estilização da Tabela de Dados
+ */
+
+.table-container {
+  /* Contêiner que envolve a tabela, controlando margens, largura máxima e scroll horizontal. */
+  margin-top: 30px;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  width: 1000px;
+}
+
+#user-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 6px rgba(var(--color-dark-rgb), 0.1);
+}
+
+/* Estilos para o Cabeçalho da Tabela (th) */
+th {
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--color-light);
+  border: none;
+  background-color: var(--color-gray);
+}
+
+/* Estilos para as Células de Dados (td) */
+td {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+/* Estilos comuns de padding e alinhamento para o cabeçalho e células. */
+th,
+td {
+  text-align: left;
+  padding: 10px;
+}
+
+/* Linhas da Tabela (tbody tr) */
+tbody tr {
+  border-bottom: 2px solid var(--color-border); /* Separador de linha */
+}
+
+/* Alinhamento de Texto Específico por Coluna. */
+th:nth-child(3), /* Idade */
+th:nth-child(4), /* Ações */
+.age-td,
+.action-td {
+  text-align: center;
+}
+
+/* Largura das colunas para otimizar a visualização dos dados. */
+.name-td {
+  width: 475px;
+  max-width: 475px;
+  overflow-wrap: break-word; /* Garante que valores longos não quebrem o layout da coluna. */
+}
+.email-td {
+  width: 275px;
+  max-width: 275px;
+  overflow-wrap: break-word;
+}
+.age-td {
+  width: 50px;
+}
+.action-td {
+  width: 200px;
+}
+
+/* Efeito visual ao passar o mouse sobre o registro. */
+tbody tr:hover {
+  background-color: var(--color-row-hover);
+}
