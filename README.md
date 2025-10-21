@@ -52,7 +52,6 @@ Esta seção detalha os próximos passos para a finalização da versão atual e
 - [x] Adicionar texto indicativo quando a tabela de usuários estiver vazia.
 - [x] Adicionar uma sidebar de navegação.
 - [x] Modularizar CSS.
-- [ ] Criar uma imagem Docker para a aplicação.
 - [ ] Fazer o deploy do backend no Render.
 - [ ] Fazer o deploy do frontend na Vercel.
 
