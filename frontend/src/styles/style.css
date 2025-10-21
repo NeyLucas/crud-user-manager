@@ -1,9 +1,3 @@
-/* Reset básico universal: Aplica box-sizing para facilitar o layout e define a fonte padrão. */
-* {
-  box-sizing: border-box;
-  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
-}
-
 /*
  * Estilização do Formulário de Cadastro (#user-form)
  */
