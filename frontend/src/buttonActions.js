@@ -30,6 +30,10 @@ export default {
       return; // Interrompe a função se os dados forem inválidos.
     }
 
+    // Deixa o botão vazio e exibe um spinner de carregamento.
+    button.textContent = '';
+    button.classList.add('loading-btn');
+
     try {
       // Chama a função correspondente que irá se comunicar comunicar com a API.
       await api.updateUser(updatedUser, userId);
@@ -43,6 +47,10 @@ export default {
     } catch (err) {
       alert(err.message);
       console.error(err);
+    } finally {
+      // Esconde o spinner e exibe o texto novamente.
+      button.classList.remove('loading-btn');
+      button.textContent = 'Adicionar Usuário';
     }
   },
 
@@ -72,6 +80,9 @@ export default {
 
     // Confirmação de exclusão para evitar erros por parte do usuário.
     if (confirm('Tem certeza que deseja excluir este usuário ?')) {
+      button.textContent = '';
+      button.classList.add('loading-btn');
+
       try {
         const success = await api.deleteUser(userId);
         rowToDelete.remove(); // Remove a linha selecionada.
@@ -86,6 +97,9 @@ export default {
       } catch (err) {
         alert(err.message);
         console.error(err);
+      } finally {
+        button.classList.remove('loading-btn');
+        button.textContent = 'Adicionar Usuário';
       }
     }
   },

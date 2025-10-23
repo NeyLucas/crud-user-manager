@@ -74,3 +74,36 @@ th:nth-child(4), /* Ações */
 tbody tr:hover {
   background-color: var(--color-row-hover);
 }
+
+/* Spinner de carregamento para a tabela */
+#loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  min-height: 100px;
+}
+
+/* Estilização do spinner */
+#loading-spinner {
+  display: inline-block;
+  width: 3em;
+  height: 3em;
+  border: 5px solid var(--color-gray);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+/* Classe para esconder um elemento completamente */
+.hidden {
+  display: none !important;
+}
+
+/* Keyframes de animação */
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
