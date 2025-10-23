@@ -52,3 +52,28 @@
   background-color: var(--color-action-back);
   margin-left: 5px;
 }
+
+.loading-btn {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-btn::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid var(--color-light);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
