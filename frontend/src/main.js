@@ -10,6 +10,8 @@ const userAgeInput = document.querySelector('#user-age');
 const hamburguerMenu = document.querySelector('#hamburguer-menu');
 const sidebar = document.querySelector('#sidebar');
 const submitButton = document.querySelector('.submit-button');
+const tableContainer = document.querySelector('.table-container');
+const loadingContainer = document.querySelector('#loading-container');
 
 /**
  * Lida com o envio do formulário.
@@ -63,11 +65,15 @@ tableTBody.addEventListener('click', (event) => {
 
 // Adiciona um ouvinte de eventos quando a página é carregada.
 document.addEventListener('DOMContentLoaded', async () => {
+  tableContainer.classList.add('hidden');
   try {
     await ui.renderUsers(tableTBody);
   } catch (err) {
     alert(err.message);
     console.error(err);
+  } finally {
+    loadingContainer.classList.add('hidden');
+    tableContainer.classList.remove('hidden');
   }
 });
 
