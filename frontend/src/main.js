@@ -9,6 +9,9 @@ const userEmailInput = document.querySelector('#user-email');
 const userAgeInput = document.querySelector('#user-age');
 const hamburguerMenu = document.querySelector('#hamburguer-menu');
 const sidebar = document.querySelector('#sidebar');
+const submitButton = document.querySelector('.submit-button');
+const tableContainer = document.querySelector('.table-container');
+const loadingContainer = document.querySelector('#loading-container');
 
 /**
  * Lida com o envio do formulário.
@@ -25,7 +28,11 @@ async function submitForm(event) {
   // Prepara o objeto para ser enviado no corpo da requisição.
   const newUser = { name, email, age };
 
+  submitButton.textContent = '';
+  submitButton.classList.add('loading-btn');
   const isUserCreated = await buttonActions.createUser(newUser, tableTBody);
+  submitButton.classList.remove('loading-btn');
+  submitButton.textContent = 'Adicionar Usuário';
 
   if (isUserCreated) {
     // Limpa o formulário após o sucesso e alerta o usuário.
@@ -58,11 +65,15 @@ tableTBody.addEventListener('click', (event) => {
 
 // Adiciona um ouvinte de eventos quando a página é carregada.
 document.addEventListener('DOMContentLoaded', async () => {
+  tableContainer.classList.add('hidden');
   try {
     await ui.renderUsers(tableTBody);
   } catch (err) {
     alert(err.message);
     console.error(err);
+  } finally {
+    loadingContainer.classList.add('hidden');
+    tableContainer.classList.remove('hidden');
   }
 });
 
